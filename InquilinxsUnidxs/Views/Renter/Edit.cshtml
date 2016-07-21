@@ -1,0 +1,11 @@
+﻿@using InquilinxsUnidxs.Presenters
+
+@model RenterPresenter
+
+@Html.ActionLink("Back to Index", "Index")
+
+<h1>Edit Renter Details</h1>
+
+<form action="~/Renter/Update" method="post" enctype="application/x-www-form-urlencoded">
+    @Html.Partial("Form", Model)
+</form>

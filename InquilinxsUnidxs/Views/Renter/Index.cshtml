@@ -1,0 +1,54 @@
+﻿@using InquilinxsUnidxs.Presenters
+@using Newtonsoft.Json
+@using System.Web.Mvc.Html
+
+@model List<RenterPresenter>
+
+@{ 
+    var index = JsonConvert.SerializeObject(Model);
+}
+
+
+
+@section scripts
+{
+    <script src="~/Content/JS/Renter/Index.js"></script>
+
+    <script>
+        var container = document.getElementById("renter-index");
+        var vm = new RenterIndex(@Html.Raw(index), container);
+    </script>
+}
+
+<h1>Renter Index</h1>
+
+<div class="form-group">
+    @Html.ActionLink("New", "New", null, new { @class = "btn btn-primary" })
+</div>
+
+<div id="renter-index">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Details</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- ko foreach: renters -->
+            <tr>
+                <td data-bind="text: firstName"></td>
+                <td data-bind="text: lastName"></td>
+                <td><a data-bind="attr: { href: detailLink }">Detail</a></td>
+                <td><a data-bind="attr: { href: editLink }">Edit</a></td>
+                <td><a href="#" data-bind="click: $root.deleteRenter.bind($root, $data)">Delete</a></td>
+            </tr>
+            <!-- /ko -->
+        </tbody>
+    </table>
+</div>
+
+<!-- TODO: no data placeholder -->
