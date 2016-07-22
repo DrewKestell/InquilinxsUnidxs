@@ -1,13 +1,15 @@
 ﻿using DataAccess.FormObjects;
+using InquilinxsUnidxs.Presenters;
 using InquilinxsUnidxs.Services.Renter;
 using Newtonsoft.Json;
+using System.Data.Entity.Validation;
 using System.Net;
 using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace InquilinxsUnidxs.Controllers
 {
-    public class RenterController : Controller
+    public class RenterController : ApplicationController
     {
         private RenterService _renterService;
 
@@ -45,15 +47,34 @@ namespace InquilinxsUnidxs.Controllers
         [HttpPost]
         public ContentResult Create(RenterFormObject formObject)
         {
-            _renterService.Create(formObject);
-            return Content(JsonConvert.SerializeObject(new HttpStatusCodeResult(HttpStatusCode.OK)));
+            try
+            {
+                _renterService.Create(formObject);
+                return this.Content(JsonConvert.SerializeObject("/Renter/Index"));
+            }
+            catch (DbEntityValidationException ex)
+            {
+                this.SetUnprocessableEntityResponse();
+                var presenter = new EntityValidationResultPresenter(ex);
+                return this.Content(JsonConvert.SerializeObject(presenter));
+            }
         }
 
         [HttpPost]
         public ContentResult Update(RenterFormObject formObject)
         {
-            _renterService.Update(formObject);
-            return Content(JsonConvert.SerializeObject(new HttpStatusCodeResult(HttpStatusCode.OK)));
+            try
+            {
+                _renterService.Update(formObject);
+                return Content(JsonConvert.SerializeObject("/Renter/Index"));
+            }
+            catch (DbEntityValidationException ex)
+            {
+                this.SetUnprocessableEntityResponse();
+                var presenter = new EntityValidationResultPresenter(ex);
+                return this.Content(JsonConvert.SerializeObject(presenter));
+            }
+            
         }
         
         [HttpDelete]

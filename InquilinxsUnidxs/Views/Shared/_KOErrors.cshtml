@@ -1,0 +1,22 @@
+﻿<script id="ko-errors" type="text/html">
+    <div class="entity-validation-results-container bg-danger" data-bind="visible: $root.entityValidationErrors().length > 0">
+        <h4>ERRORS OCCURED DURING ENTITY VALIDATION</h4>
+        <!-- ko foreach: entityValidationErrors -->
+        <div class="entity-validation-container">
+            <label data-bind="text: entityName"></label>
+            <div class="entity-validation-errors-container">
+                <!-- ko foreach: fieldErrors -->
+                <label data-bind="text: fieldName"></label>
+                <div class="entity-validation-errors">
+                    <!-- ko foreach: errors -->
+                    <p data-bind="text: $data"></p>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</script>
+
+<div data-bind="template: 'ko-errors'"></div>

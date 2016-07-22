@@ -51,13 +51,8 @@
   <ItemGroup>
     <Compile Include="ApplicationContext.cs" />
     <Compile Include="ApplicationContextInitializer.cs" />
-    <Compile Include="Migrations\201607212008412_InitialMigration.cs" />
-    <Compile Include="Migrations\201607212008412_InitialMigration.Designer.cs">
-      <DependentUpon>201607212008412_InitialMigration.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\Renter.cs" />
     <Compile Include="FormObjects\RenterFormObject.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\RenterService.cs" />
     <Compile Include="Services\Service.cs" />
@@ -67,11 +62,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607212008412_InitialMigration.resx">
-      <DependentUpon>201607212008412_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

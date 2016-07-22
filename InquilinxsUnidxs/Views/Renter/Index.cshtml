@@ -8,15 +8,14 @@
     var index = JsonConvert.SerializeObject(Model);
 }
 
-
-
 @section scripts
 {
-    <script src="~/Content/JS/Renter/Index.js"></script>
+    <script src="~/Content/JS/Renter.js"></script>
 
     <script>
         var container = document.getElementById("renter-index");
-        var vm = new RenterIndex(@Html.Raw(index), container);
+        var vm = new RenterIndex(@Html.Raw(index));
+        ko.applyBindings(vm, container);
     </script>
 }
 
