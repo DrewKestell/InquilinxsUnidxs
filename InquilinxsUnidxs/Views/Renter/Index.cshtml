@@ -2,10 +2,10 @@
 @using Newtonsoft.Json
 @using System.Web.Mvc.Html
 
-@model List<RenterPresenter>
+@model PaginationPresenter<RenterPresenter>
 
 @{ 
-    var index = JsonConvert.SerializeObject(Model);
+    var index = JsonConvert.SerializeObject(Model.Model);
 }
 
 @section scripts
@@ -26,11 +26,16 @@
 </div>
 
 <div id="renter-index">
-    <table class="table">
+    <table class="table table-striped table-responsive">
         <thead>
             <tr>
                 <th>First Name</th>
                 <th>Last Name</th>
+                <th>Address1</th>
+                <th>Address2</th>
+                <th>City</th>
+                <th>State</th>
+                <th>ZIP</th>
                 <th>Details</th>
                 <th>Edit</th>
                 <th>Delete</th>
@@ -41,6 +46,11 @@
             <tr>
                 <td data-bind="text: firstName"></td>
                 <td data-bind="text: lastName"></td>
+                <td data-bind="text: address1"></td>
+                <td data-bind="text: address2"></td>
+                <td data-bind="text: city"></td>
+                <td data-bind="text: stateAbbreviation"></td>
+                <td data-bind="text: zip"></td>
                 <td><a data-bind="attr: { href: detailLink }">Detail</a></td>
                 <td><a data-bind="attr: { href: editLink }">Edit</a></td>
                 <td><a href="#" data-bind="click: $root.deleteRenter.bind($root, $data)">Delete</a></td>
@@ -51,3 +61,5 @@
 </div>
 
 <!-- TODO: no data placeholder -->
+
+@Html.Partial("_Pagination", Model)

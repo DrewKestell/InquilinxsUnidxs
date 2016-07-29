@@ -27,10 +27,12 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Inquilinxs Unidxs</p>
-        </footer>
+        <div class="site-footer">
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Inquilinxs Unidxs</p>
+            </footer>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

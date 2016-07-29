@@ -35,7 +35,7 @@ namespace InquilinxsUnidxs
                 "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/CSS/bootstrap.css",
+                "~/Content/CSS/Bootstrap/bootstrap.css",
                 "~/Content/CSS/site.css"));
         }
     }

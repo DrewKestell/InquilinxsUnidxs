@@ -1,7 +1,16 @@
 ﻿var Renter = function (renter) {
     this.id = renter.ID;
-    this.firstName = renter.FirstName;
-    this.lastName = renter.LastName;
+    this.firstName = ko.observable(renter.FirstName);
+    this.lastName = ko.observable(renter.LastName);
+    this.address1 = ko.observable(renter.Address.Address1);
+    this.address2 = ko.observable(renter.Address.Address2);
+    this.city = ko.observable(renter.Address.City);
+    this.stateAbbreviation = renter.Address.State.Abbreviation;
+    this.stateId = ko.observable(renter.Address.State.ID);
+    this.zip = ko.observable(renter.Address.ZIP);
+
+    this.allStates = renter.AllStates;
+
     this.entityValidationErrors = ko.observableArray();
 
     this.detailLink = ko.computed(function () {

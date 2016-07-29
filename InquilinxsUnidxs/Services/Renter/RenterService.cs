@@ -1,6 +1,5 @@
 ﻿using DataAccess.FormObjects;
 using InquilinxsUnidxs.Presenters;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace InquilinxsUnidxs.Services.Renter
@@ -9,17 +8,23 @@ namespace InquilinxsUnidxs.Services.Renter
     {
         public RenterPresenter GetNewRenterPresenter()
         {
-            return new RenterPresenter();
+            using (var context = this.GetApplicationContext())
+            {
+                var states = context.States.ToList();
+                return new RenterPresenter(states);
+            }
         }
 
-        public List<RenterPresenter> GetRenterPresenters()
+        public PaginationPresenter<RenterPresenter> GetRenterPresenters(int page, int pageSize)
         {
-            return this.GetRenters().Select(r => new RenterPresenter(r)).ToList();
+            var dto = base.GetRenters(page, pageSize);
+            var model = dto.Model.Select(r => new RenterPresenter(r)).ToList();
+            return new PaginationPresenter<RenterPresenter>(model, page, pageSize, dto.TotalRecords, dto.TotalPages);
         }
 
         public RenterPresenter GetRenterPresenter(int renterID)
         {
-            return new RenterPresenter(this.GetRenter(renterID));
+            return new RenterPresenter(base.GetRenter(renterID), base.GetStates());
         }
 
         public new void Create(RenterFormObject formObject)

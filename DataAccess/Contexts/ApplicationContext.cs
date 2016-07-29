@@ -1,13 +1,8 @@
 ﻿using DataAccess.Models;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DataAccess
+namespace DataAccess.Contexts
 {
     public class ApplicationContext : DbContext
     {
@@ -17,6 +12,7 @@ namespace DataAccess
         }
 
         public virtual DbSet<Renter> Renters { get; set; }
+        public virtual DbSet<State> States { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

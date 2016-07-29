@@ -3,7 +3,6 @@ using InquilinxsUnidxs.Presenters;
 using InquilinxsUnidxs.Services.Renter;
 using Newtonsoft.Json;
 using System.Data.Entity.Validation;
-using System.Net;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -19,9 +18,9 @@ namespace InquilinxsUnidxs.Controllers
             _renterService = new RenterService();
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 10)
         {
-            var presenters = _renterService.GetRenterPresenters();
+            var presenters = _renterService.GetRenterPresenters(page, pageSize);
             return this.View(presenters);
         }
 
@@ -73,8 +72,7 @@ namespace InquilinxsUnidxs.Controllers
                 this.SetUnprocessableEntityResponse();
                 var presenter = new EntityValidationResultPresenter(ex);
                 return this.Content(JsonConvert.SerializeObject(presenter));
-            }
-            
+            }            
         }
         
         [HttpDelete]

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DataAccess.Models
 {
@@ -16,5 +11,9 @@ namespace DataAccess.Models
 
         [Required]
         public string LastName { get; set; }
+
+        public int AddressID { get; set; }
+
+        public virtual Address Address { get; set; }
     }
 }
