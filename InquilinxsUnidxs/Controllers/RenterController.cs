@@ -1,4 +1,4 @@
-﻿using DataAccess.FormObjects;
+﻿using DataAccess.FormObject;
 using InquilinxsUnidxs.Presenters;
 using InquilinxsUnidxs.Services.Renter;
 using Newtonsoft.Json;
@@ -13,9 +13,9 @@ namespace InquilinxsUnidxs.Controllers
         private RenterService _renterService;
 
         protected override void Initialize(RequestContext requestContext)
-        {
-            base.Initialize(requestContext);
+        {            
             _renterService = new RenterService();
+            base.Initialize(requestContext);
         }
 
         public ActionResult Index(int page = 1, int pageSize = 10)

@@ -1,11 +1,11 @@
-﻿using DataAccess.Enums;
-using DataAccess.Models;
+﻿using DataAccess.Enum;
+using DataAccess.Model;
 
 namespace InquilinxsUnidxs.Presenters
 {
     public class StatePresenter
     {
-        public States ID { get; private set; }
+        public States? ID { get; private set; }
         public string Abbreviation { get; private set; }
         public string Name { get; private set; }
 

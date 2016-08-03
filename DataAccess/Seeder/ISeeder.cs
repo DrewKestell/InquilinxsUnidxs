@@ -1,6 +1,6 @@
-﻿using DataAccess.Contexts;
+﻿using DataAccess.Context;
 
-namespace DataAccess.Seeders
+namespace DataAccess.Seeder
 {
     public interface ISeeder
     {

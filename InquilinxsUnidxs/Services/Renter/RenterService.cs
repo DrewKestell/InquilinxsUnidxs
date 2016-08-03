@@ -1,10 +1,10 @@
-﻿using DataAccess.FormObjects;
+﻿using DataAccess.FormObject;
 using InquilinxsUnidxs.Presenters;
 using System.Linq;
 
 namespace InquilinxsUnidxs.Services.Renter
 {
-    public class RenterService : DataAccess.Services.RenterService
+    public class RenterService : DataAccess.Service.RenterService
     {
         public RenterPresenter GetNewRenterPresenter()
         {

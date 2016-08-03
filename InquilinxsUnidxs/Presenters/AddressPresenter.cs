@@ -1,4 +1,4 @@
-﻿using DataAccess.Models;
+﻿using DataAccess.Model;
 
 namespace InquilinxsUnidxs.Presenters
 {

@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using InquilinxsUnidxs.Controllers
+
+@{ 
+    var applicationController = (ApplicationController)ViewContext.Controller;
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -21,11 +27,27 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Renters", "Index", "Renter")</li>
+                    
+                    @if (applicationController.CurrentUser == null)
+                    {
+                        <li>@Html.ActionLink("Log In", "LogIn", "Authentication")</li>
+                        <li>@Html.ActionLink("Register", "Register", "Authentication")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Log Out", "LogOut", "Authentication")</li>
+                    }                    
                 </ul>
+                @if (applicationController.CurrentUser != null)
+                {
+                    <span class="pull-right header-user-info">Welcome, @applicationController.CurrentUser.Username!</span>
+                }               
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container body-content">        
+        @Html.Partial("_Success")
+        @Html.Partial("_Error")
         @RenderBody()
         <div class="site-footer">
             <hr />

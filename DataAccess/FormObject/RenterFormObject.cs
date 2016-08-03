@@ -1,6 +1,6 @@
-﻿using DataAccess.Enums;
+﻿using DataAccess.Enum;
 
-namespace DataAccess.FormObjects
+namespace DataAccess.FormObject
 {
     public class RenterFormObject
     {

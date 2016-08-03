@@ -1,11 +1,11 @@
-﻿using DataAccess.DTOs;
-using DataAccess.FormObjects;
-using DataAccess.Models;
+﻿using DataAccess.DTO;
+using DataAccess.FormObject;
+using DataAccess.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DataAccess.Services
+namespace DataAccess.Service
 {
     public class RenterService : Service
     {

@@ -1,7 +1,7 @@
-﻿using DataAccess.Seeders;
+﻿using DataAccess.Seeder;
 using System.Data.Entity;
 
-namespace DataAccess.Contexts
+namespace DataAccess.Context
 {
     public class ApplicationContextInitializer : DropCreateDatabaseIfModelChanges<ApplicationContext>
     {
@@ -15,6 +15,9 @@ namespace DataAccess.Contexts
 
             var renterSeeder = new RenterSeeder();
             renterSeeder.Seed(context);
+
+            var userSeeder = new UserSeeder();
+            userSeeder.Seed(context);
 
             context.SaveChanges(); 
         }

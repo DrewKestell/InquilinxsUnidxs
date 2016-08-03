@@ -60,3 +60,30 @@ textarea {
     clear: both;
     margin-top: 8%;
 }
+
+.header-user-info {
+    color: white;
+    font-size: 120%;
+    padding: 15px 0;
+}
+
+span.bg-danger {    
+    padding: 5px 10px;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+span.bg-success {    
+    padding: 5px 10px;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+abbr[title], abbr[data-original-title] {
+    border-bottom: none;    
+}
+
+abbr.required {
+    color: red;
+    font-size: 120%;
+}

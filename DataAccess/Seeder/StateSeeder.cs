@@ -1,9 +1,9 @@
-﻿using DataAccess.Contexts;
-using DataAccess.Enums;
-using DataAccess.Models;
+﻿using DataAccess.Context;
+using DataAccess.Enum;
+using DataAccess.Model;
 using System.Data.Entity.Migrations;
 
-namespace DataAccess.Seeders
+namespace DataAccess.Seeder
 {
     public class StateSeeder : ISeeder
     {

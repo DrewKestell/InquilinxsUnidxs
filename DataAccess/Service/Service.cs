@@ -1,6 +1,6 @@
-﻿using DataAccess.Contexts;
+﻿using DataAccess.Context;
 
-namespace DataAccess.Services
+namespace DataAccess.Service
 {
     public class Service
     {
