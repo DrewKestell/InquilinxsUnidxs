@@ -1,6 +1,6 @@
 ﻿using DataAccess.FormObject;
 using InquilinxsUnidxs.Presenters;
-using InquilinxsUnidxs.Services.Renter;
+using InquilinxsUnidxs.Services;
 using Newtonsoft.Json;
 using System.Data.Entity.Validation;
 using System.Web.Mvc;
@@ -28,8 +28,7 @@ namespace InquilinxsUnidxs.Controllers
         {
             var presenter = _renterService.GetNewRenterPresenter();
             return this.View(presenter);
-        }
-        
+        }        
 
         public ActionResult Detail(int renterID)
         {

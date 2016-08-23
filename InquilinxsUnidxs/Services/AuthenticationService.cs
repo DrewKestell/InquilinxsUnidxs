@@ -5,7 +5,7 @@ using System;
 using System.Web;
 using System.Web.Security;
 
-namespace InquilinxsUnidxs.Services.Authentication
+namespace InquilinxsUnidxs.Services
 {
     public class AuthenticationService : DataAccess.Service.AuthenticationService
     {
@@ -51,7 +51,7 @@ namespace InquilinxsUnidxs.Services.Authentication
             HttpContext.Current.Response.SetCookie(cookie);
         }
 
-        public new void Register(string username, string password, string confirmPassword, string email)
+        public void Register(string username, string password, string confirmPassword, string email)
         {
             if (String.IsNullOrWhiteSpace(username))
                 throw new InquilinxsException(message: _registerUsernameFailure);

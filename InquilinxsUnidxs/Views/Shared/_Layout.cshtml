@@ -25,23 +25,18 @@
                 @Html.ActionLink("Inquilinxs Unidxs Renter Database", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
+            @if (applicationController.CurrentUser != null)
+            {
                 <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Landlords", "Index", "Landlord")</li>
+                    <li>@Html.ActionLink("Neighborhoods", "Index", "Neighborhood")</li>
+                    <li>@Html.ActionLink("Buildings", "Index", "Building")</li>
+                    <li>@Html.ActionLink("Residences", "Index", "Residence")</li>
                     <li>@Html.ActionLink("Renters", "Index", "Renter")</li>
-                    
-                    @if (applicationController.CurrentUser == null)
-                    {
-                        <li>@Html.ActionLink("Log In", "LogIn", "Authentication")</li>
-                        <li>@Html.ActionLink("Register", "Register", "Authentication")</li>
-                    }
-                    else
-                    {
-                        <li>@Html.ActionLink("Log Out", "LogOut", "Authentication")</li>
-                    }                    
+                    <li>@Html.ActionLink("Map", "Show", "Map")</li>
                 </ul>
-                @if (applicationController.CurrentUser != null)
-                {
-                    <span class="pull-right header-user-info">Welcome, @applicationController.CurrentUser.Username!</span>
-                }               
+                <span class="pull-right header-user-info">Welcome, @applicationController.CurrentUser.Username!</span>   
+            }
             </div>
         </div>
     </div>
@@ -52,6 +47,17 @@
         <div class="site-footer">
             <hr />
             <footer>
+                <div class="footer-nav">
+                    @if (applicationController.CurrentUser == null)
+                    {
+                        <span class="footer-link">@Html.ActionLink("Log In", "LogIn", "Authentication")</span>
+                        <span class="footer-link">@Html.ActionLink("Register", "Register", "Authentication")</span>
+                    }
+                    else
+                    {
+                        <span class="footer-link">@Html.ActionLink("Log Out", "LogOut", "Authentication")</span>
+                    }
+                </div>
                 <p>&copy; @DateTime.Now.Year - Inquilinxs Unidxs</p>
             </footer>
         </div>

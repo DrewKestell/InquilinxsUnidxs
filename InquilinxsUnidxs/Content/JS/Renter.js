@@ -2,14 +2,18 @@
     this.id = renter.ID;
     this.firstName = ko.observable(renter.FirstName);
     this.lastName = ko.observable(renter.LastName);
-    this.address1 = ko.observable(renter.Address.Address1);
-    this.address2 = ko.observable(renter.Address.Address2);
-    this.city = ko.observable(renter.Address.City);
-    this.stateAbbreviation = renter.Address.State.Abbreviation;
-    this.stateId = ko.observable(renter.Address.State.ID);
-    this.zip = ko.observable(renter.Address.ZIP);
+    this.address = renter.Address;
+    this.residence = renter.ResidenceName;
+    this.buildingId = ko.observable(renter.BuildingID);
+    this.residenceId = ko.observable(renter.ResidenceID);
+    this.allBuildings = renter.AllBuildings;
 
-    this.allStates = renter.AllStates;
+    this.residences = ko.computed(function () {
+        var residences = _.findWhere(this.allBuildings, { Item1: this.buildingId() });
+        if (residences) {
+            return residences.Item3;
+        }
+    }, this);
 
     this.entityValidationErrors = ko.observableArray();
 
@@ -45,7 +49,6 @@
             }
         });
     };
-
 };
 
 var RenterIndex = function (index) {

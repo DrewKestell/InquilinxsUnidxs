@@ -1,0 +1,28 @@
+﻿@using InquilinxsUnidxs.Presenters
+@using Newtonsoft.Json
+
+@model MapPresenter
+
+@{
+    var presenter = JsonConvert.SerializeObject(Model);
+}
+
+@section scripts
+{
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZR2L4X7wU8GVxaVfNlPnE47pj39cVAbc"></script>
+    <script src="~/Content/JS/Map.js"></script>
+
+    <script>
+        var container = document.getElementById("map");
+        var vm = new Map(@Html.Raw(presenter));
+        ko.applyBindings(vm, container);
+    </script>
+}
+
+<div class="map-controls">
+    Some Map Controls
+</div>
+
+<div id="map">
+
+</div>

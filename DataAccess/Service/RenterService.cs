@@ -9,11 +9,13 @@ namespace DataAccess.Service
 {
     public class RenterService : Service
     {
-        protected List<State> GetStates()
+        protected List<Building> GetBuildings()
         {
             using (var context = this.GetApplicationContext())
             {
-                return context.States
+                return context.Buildings
+                    .Include("State")
+                    .Include("Residences")
                     .ToList();
             }
         }
@@ -23,7 +25,7 @@ namespace DataAccess.Service
             using (var context = this.GetApplicationContext())
             {
                 var model = context.Renters
-                    .Include("Address.State")
+                    .Include("Residence.Building.State")
                     .OrderBy(r => r.LastName)
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize)
@@ -41,7 +43,7 @@ namespace DataAccess.Service
             using (var context = this.GetApplicationContext())
             {
                 return context.Renters
-                    .Include("Address.State")
+                    .Include("Residence.Building.State")
                     .Single(r => r.ID == renterID);
             }
         }
@@ -55,14 +57,7 @@ namespace DataAccess.Service
                 {
                     FirstName = formObject.FirstName,
                     LastName = formObject.LastName,
-                    Address = new Address
-                    {
-                        Address1 = formObject.Address1,
-                        Address2 = formObject.Address2,
-                        City = formObject.City,
-                        StateID = formObject.StateID,
-                        ZIP = formObject.ZIP
-                    }
+                     ResidenceID = formObject.ResidenceID
                 });
                 context.SaveChanges();
             }
@@ -76,11 +71,6 @@ namespace DataAccess.Service
                 var renter = context.Renters.Single(r => r.ID == formObject.ID);
                 renter.FirstName = formObject.FirstName;
                 renter.LastName = formObject.LastName;
-                renter.Address.Address1 = formObject.Address1;
-                renter.Address.Address2 = formObject.Address2;
-                renter.Address.City = formObject.City;
-                renter.Address.StateID = formObject.StateID;
-                renter.Address.ZIP = formObject.ZIP;
                 context.SaveChanges();
             }
         }

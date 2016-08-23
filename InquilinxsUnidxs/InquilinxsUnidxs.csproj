@@ -18,10 +18,10 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressSSLPort>44305</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -131,32 +131,52 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\BuildingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LandlordController.cs" />
+    <Compile Include="Controllers\MapController.cs" />
+    <Compile Include="Controllers\NeighborhoodController.cs" />
     <Compile Include="Controllers\RenterController.cs" />
+    <Compile Include="Controllers\ResidenceController.cs" />
     <Compile Include="Exceptions\InquilinxsException.cs" />
     <Compile Include="Filters\Authenticate.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Presenters\AddressPresenter.cs" />
+    <Compile Include="Presenters\BuildingPresenter.cs" />
     <Compile Include="Presenters\EntityValidationErrorsPresenter.cs" />
     <Compile Include="Presenters\EntityValidationResultPresenter.cs" />
     <Compile Include="Presenters\IPaginationPresenter.cs" />
+    <Compile Include="Presenters\LandlordPresenter.cs" />
+    <Compile Include="Presenters\MapBuildingPresenter.cs" />
+    <Compile Include="Presenters\MapPresenter.cs" />
+    <Compile Include="Presenters\NeighborhoodPresenter.cs" />
     <Compile Include="Presenters\PaginationPresenter.cs" />
     <Compile Include="Presenters\RenterPresenter.cs" />
+    <Compile Include="Presenters\ResidencePresenter.cs" />
     <Compile Include="Presenters\StatePresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Authentication\AuthenticationService.cs" />
-    <Compile Include="Services\Renter\RenterService.cs" />
+    <Compile Include="Services\AuthenticationService.cs" />
+    <Compile Include="Services\BuildingService.cs" />
+    <Compile Include="Services\LandlordService.cs" />
+    <Compile Include="Services\MapService.cs" />
+    <Compile Include="Services\NeighborhoodService.cs" />
+    <Compile Include="Services\RenterService.cs" />
+    <Compile Include="Services\ResidenceService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\CSS\Bootstrap\bootstrap-theme.css" />
     <Content Include="Content\CSS\Bootstrap\bootstrap-theme.min.css" />
     <Content Include="Content\CSS\Bootstrap\bootstrap.css" />
     <Content Include="Content\CSS\Bootstrap\bootstrap.min.css" />
+    <Content Include="Content\JS\Building.js" />
     <Content Include="Content\JS\Global.js" />
+    <Content Include="Content\JS\Landlord.js" />
+    <Content Include="Content\JS\Map.js" />
+    <Content Include="Content\JS\Neighborhood.js" />
     <Content Include="Content\JS\Register.js" />
     <Content Include="Content\JS\Renter.js" />
+    <Content Include="Content\JS\Residence.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -216,6 +236,27 @@
     <Content Include="Views\Authentication\Register.cshtml" />
     <Content Include="Views\Shared\_Error.cshtml" />
     <Content Include="Views\Shared\_Success.cshtml" />
+    <Content Include="Views\Building\Index.cshtml" />
+    <Content Include="Views\Landlord\Index.cshtml" />
+    <Content Include="Views\Neighborhood\Index.cshtml" />
+    <Content Include="Views\Residence\Index.cshtml" />
+    <Content Include="Views\Building\New.cshtml" />
+    <Content Include="Views\Landlord\New.cshtml" />
+    <Content Include="Views\Residence\New.cshtml" />
+    <Content Include="Views\Neighborhood\New.cshtml" />
+    <Content Include="Views\Building\Edit.cshtml" />
+    <Content Include="Views\Building\Detail.cshtml" />
+    <Content Include="Views\Building\_Form.cshtml" />
+    <Content Include="Views\Landlord\Edit.cshtml" />
+    <Content Include="Views\Landlord\Detail.cshtml" />
+    <Content Include="Views\Landlord\_Form.cshtml" />
+    <Content Include="Views\Neighborhood\Edit.cshtml" />
+    <Content Include="Views\Neighborhood\Detail.cshtml" />
+    <Content Include="Views\Neighborhood\_Form.cshtml" />
+    <Content Include="Views\Residence\Edit.cshtml" />
+    <Content Include="Views\Residence\Detail.cshtml" />
+    <Content Include="Views\Residence\_Form.cshtml" />
+    <Content Include="Views\Map\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

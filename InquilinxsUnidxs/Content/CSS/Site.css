@@ -58,13 +58,12 @@ textarea {
 .site-footer {
     border: 1px solid transparent; /* hack to get margin-top working with clear: both. i'm bad at CSS. */
     clear: both;
-    margin-top: 8%;
 }
 
 .header-user-info {
     color: white;
     font-size: 120%;
-    padding: 15px 0;
+    padding: 15px 10px;
 }
 
 span.bg-danger {    
@@ -86,4 +85,28 @@ abbr[title], abbr[data-original-title] {
 abbr.required {
     color: red;
     font-size: 120%;
+}
+
+.no-data {
+    padding: 50px;
+    text-align: center;
+    background-color: #f8f8f8;
+    text-transform: uppercase;
+    font-size: 18px;
+}
+
+.footer-link {
+    margin-right: 10px;    
+}
+
+.footer-nav {
+    margin-bottom: 15px;
+}
+
+.map-controls {
+    margin: 10px 0 22px 0;
+}
+
+#map { 
+    height:800px
 }

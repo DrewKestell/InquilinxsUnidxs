@@ -1,0 +1,27 @@
+﻿@using InquilinxsUnidxs.Presenters
+@using Newtonsoft.Json
+
+@model ResidencePresenter
+
+@{
+    var renter = JsonConvert.SerializeObject(Model);
+}
+
+@section scripts
+{
+    <script src="~/Content/JS/Residence.js"></script>
+
+    <script>
+        var container = document.getElementById("new-residence-form");
+        var vm = new Residence(@Html.Raw(renter));
+        ko.applyBindings(vm, container);
+    </script>
+}
+
+@Html.ActionLink("Back to Index", "Index")
+
+<h1>New Residence</h1>
+
+<div id="new-residence-form">
+    @Html.Partial("_Form", Model)
+</div>

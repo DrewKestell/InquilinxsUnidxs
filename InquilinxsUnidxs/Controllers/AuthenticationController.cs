@@ -1,5 +1,5 @@
 ﻿using InquilinxsUnidxs.Exceptions;
-using InquilinxsUnidxs.Services.Authentication;
+using InquilinxsUnidxs.Services;
 using System.Web.Mvc;
 using System.Web.Routing;
 

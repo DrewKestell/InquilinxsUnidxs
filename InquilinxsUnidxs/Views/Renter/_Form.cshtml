@@ -15,28 +15,15 @@
 </div>
 
 <div class="form-group">
-    <label for="address1">Address 1<abbr class="required" title="This field is required"> *</abbr></label>
-    <input class="form-control" id="address1" type="text" data-bind="value: address1" />
+    <label for="building">Building<abbr class="required" title="This field is required"> *</abbr></label>
+    <select class="form-control" id="building" data-bind="options: allBuildings, optionsValue: 'Item1', optionsText: 'Item2', value: buildingId, optionsCaption: 'Choose a Building...'"></select>
 </div>
 
+<!-- ko if: buildingId -->
 <div class="form-group">
-    <label for="address2">Address 2</label>
-    <input class="form-control" id="address2" type="text" data-bind="value: address2" />
+    <label for="residence">Residence<abbr class="required" title="This field is required"> *</abbr></label>
+    <select class="form-control" id="residence" data-bind="options: residences, optionsValue: 'Item1', optionsText: 'Item2', value: residenceId, optionsCaption: 'Choose a Residence...'"></select>
 </div>
-
-<div class="form-group">
-    <label for="city">City<abbr class="required" title="This field is required"> *</abbr></label>
-    <input class="form-control" id="city" type="text" data-bind="value: city" />
-</div>
-
-<div class="form-group">
-    <label for="state">State<abbr class="required" title="This field is required"> *</abbr></label>
-    <select class="form-control" id="state" data-bind="options: allStates, optionsValue: 'Item1', optionsText: 'Item2', value: stateId, optionsCaption: 'Choose a State...'"></select>
-</div>
-
-<div class="form-group">
-    <label for="zip">ZIP<abbr class="required" title="This field is required"> *</abbr></label>
-    <input class="form-control" id="zip" type="text" data-bind="value: zip" />
-</div>
+<!-- /ko -->
 
 <a href="#" class="btn btn-primary" data-bind="click: save">Save</a>

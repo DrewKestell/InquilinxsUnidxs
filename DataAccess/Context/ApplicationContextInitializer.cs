@@ -13,12 +13,28 @@ namespace DataAccess.Context
             var stateSeeder = new StateSeeder();
             stateSeeder.Seed(context);
 
+            var landlordSeeder = new LandlordSeeder();
+            landlordSeeder.Seed(context);
+            context.SaveChanges();
+
+            var neighborhoodSeeder = new NeighborhoodSeeder();
+            neighborhoodSeeder.Seed(context);
+            context.SaveChanges();
+
+            var buildingSeeder = new BuildingSeeder();
+            buildingSeeder.Seed(context);
+            context.SaveChanges();
+
+            var residenceSeeder = new ResidenceSeeder();
+            residenceSeeder.Seed(context);
+            context.SaveChanges();
+
             var renterSeeder = new RenterSeeder();
             renterSeeder.Seed(context);
+            context.SaveChanges();
 
             var userSeeder = new UserSeeder();
             userSeeder.Seed(context);
-
             context.SaveChanges(); 
         }
     }

@@ -2,29 +2,26 @@
 using InquilinxsUnidxs.Presenters;
 using System.Linq;
 
-namespace InquilinxsUnidxs.Services.Renter
+namespace InquilinxsUnidxs.Services
 {
     public class RenterService : DataAccess.Service.RenterService
     {
         public RenterPresenter GetNewRenterPresenter()
         {
-            using (var context = this.GetApplicationContext())
-            {
-                var states = context.States.ToList();
-                return new RenterPresenter(states);
-            }
+            return new RenterPresenter(base.GetBuildings());
         }
 
         public PaginationPresenter<RenterPresenter> GetRenterPresenters(int page, int pageSize)
         {
             var dto = base.GetRenters(page, pageSize);
-            var model = dto.Model.Select(r => new RenterPresenter(r)).ToList();
+            var buildings = base.GetBuildings();
+            var model = dto.Model.Select(r => new RenterPresenter(r, buildings)).ToList();
             return new PaginationPresenter<RenterPresenter>(model, page, pageSize, dto.TotalRecords, dto.TotalPages);
         }
 
         public RenterPresenter GetRenterPresenter(int renterID)
         {
-            return new RenterPresenter(base.GetRenter(renterID), base.GetStates());
+            return new RenterPresenter(base.GetRenter(renterID), base.GetBuildings());
         }
 
         public new void Create(RenterFormObject formObject)

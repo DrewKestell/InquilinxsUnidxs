@@ -1,0 +1,27 @@
+﻿@using InquilinxsUnidxs.Presenters
+@using Newtonsoft.Json
+
+@model NeighborhoodPresenter
+
+@{
+    var renter = JsonConvert.SerializeObject(Model);
+}
+
+@section scripts
+{
+    <script src="~/Content/JS/Neighborhood.js"></script>
+
+    <script>
+        var container = document.getElementById("new-neighborhood-form");
+        var vm = new Neighborhood(@Html.Raw(renter));
+        ko.applyBindings(vm, container);
+    </script>
+}
+
+@Html.ActionLink("Back to Index", "Index")
+
+<h1>New Neighborhood</h1>
+
+<div id="new-neighborhood-form">
+    @Html.Partial("_Form", Model)
+</div>

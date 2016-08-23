@@ -5,7 +5,6 @@ namespace DataAccess.Model
 {
     public class User
     {
-        [Key]
         public int ID { get; set; }
 
         [Required, MaxLength(40), Index(IsUnique = true)]
