@@ -96,7 +96,8 @@ var Map = function (presenter) {
             var marker = new google.maps.Marker({
                 position: location,
                 map: map,
-                title: building.FullAddress
+                title: building.FullAddress,
+                icon: "http://i.imgur.com/KrtIF7r.png" // host this somewhere else
             });
             var contentString =
             '<div class="info-window">' +
