@@ -25,6 +25,7 @@ namespace DataAccess.Service
             {
                 var model = context.Residences
                     .Include("Building.State")
+                    .Include("Renters")
                     .OrderBy(r => r.Building.Address)
                     .ThenBy(r => r.Name)
                     .Skip((page - 1) * pageSize)
@@ -44,6 +45,7 @@ namespace DataAccess.Service
             {
                 return context.Residences
                     .Include("Building.State")
+                    .Include("Renters")
                     .Single(r => r.ID == residenceID);
             }
         }

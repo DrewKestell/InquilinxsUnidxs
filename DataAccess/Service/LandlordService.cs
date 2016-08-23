@@ -13,6 +13,7 @@ namespace DataAccess.Service
             using (var context = this.GetApplicationContext())
             {
                 var model = context.Landlords
+                    .Include("Buildings.State")
                     .OrderBy(l => l.LastName)
                     .ThenBy(l => l.FirstName)
                     .Skip((page - 1) * pageSize)
@@ -31,6 +32,7 @@ namespace DataAccess.Service
             using (var context = this.GetApplicationContext())
             {
                 return context.Landlords
+                    .Include("Buildings.State")
                     .Single(r => r.ID == landlordID);
             }
         }

@@ -39,6 +39,9 @@ namespace DataAccess.Service
             {
                 var model = context.Buildings
                     .Include("State")
+                    .Include("Landlord")
+                    .Include("Neighborhood")
+                    .Include("Residences")
                     .OrderBy(b => b.State.Name)
                     .ThenBy(b => b.City)
                     .ThenBy(b => b.Address)
@@ -59,6 +62,9 @@ namespace DataAccess.Service
             {
                 return context.Buildings
                     .Include("State")
+                    .Include("Landlord")
+                    .Include("Neighborhood")
+                    .Include("Residences")
                     .Single(r => r.ID == buildingID);
             }
         }

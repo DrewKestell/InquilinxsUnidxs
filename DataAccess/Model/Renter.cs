@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace DataAccess.Model
 {
@@ -15,5 +16,13 @@ namespace DataAccess.Model
         public int ResidenceID { get; set; }
 
         public virtual Residence Residence { get; set; }
+
+        public string FullName
+        {
+            get
+            {
+                return String.Format("{0} {1}", FirstName, LastName);
+            }
+        }
     }
 }

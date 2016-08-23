@@ -1,4 +1,7 @@
 ﻿using DataAccess.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace InquilinxsUnidxs.Presenters
 {
@@ -7,6 +10,7 @@ namespace InquilinxsUnidxs.Presenters
         public int ID { get; private set; }
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
+        public List<Tuple<string, int>> Buildings { get; private set; }
 
         public LandlordPresenter() { }
 
@@ -15,6 +19,7 @@ namespace InquilinxsUnidxs.Presenters
             ID = landlord.ID;
             FirstName = landlord.FirstName;
             LastName = landlord.LastName;
+            Buildings = landlord.Buildings.Select(b => Tuple.Create(b.FullAddress, b.ID)).ToList();
         }
     }
 }

@@ -5,3 +5,41 @@
 @Html.ActionLink("Back to Index", "Index")
 
 <h1>Building Details</h1>
+
+<div>
+    <label>Address:</label>
+    @Model.Address
+</div>
+
+<div>
+    <label>City:</label>
+    @Model.City
+</div>
+
+<div>
+    <label>State:</label>
+    @Model.StateName (@Model.StateAbbreviation)
+</div>
+
+<div>
+    <label>ZIP:</label>
+    @Model.ZIP
+</div>
+
+<div>
+    <label>Landlord:</label>
+    @Html.ActionLink(Model.LandlordName, "Detail", "Landlord", new { landlordID = Model.LandlordID }, null)
+</div>
+
+<div>
+    <label>Neighborhood:</label>
+    @Html.ActionLink(Model.NeighborhoodName, "Detail", "Neighborhood", new { neighborhoodID = Model.NeighborhoodID }, null)
+</div>
+
+<div class="form-group">
+    <label><u>Residences:</u></label>
+    @foreach (var residence in Model.Residences)
+    {
+        <div>@Html.ActionLink(residence.Item1, "Detail", "Residence", new { residenceID = residence.Item2 }, null)</div>
+    }
+</div>

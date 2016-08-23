@@ -13,9 +13,13 @@ namespace InquilinxsUnidxs.Presenters
         public string City { get; private set; }
         public string ZIP { get; private set; }
         public States? StateID { get; private set; }
+        public string StateName { get; private set; }
         public string StateAbbreviation { get; private set; }
         public int LandlordID { get; private set; }
+        public string LandlordName { get; private set; }
         public int NeighborhoodID { get; private set; }
+        public string NeighborhoodName { get; private set; }
+        public List<Tuple<string, int>> Residences { get; private set; }
 
         public List<Tuple<States, string>> AllStates { get; private set; }
         public List<Tuple<int, string>> AllLandlords { get; private set; }
@@ -36,9 +40,13 @@ namespace InquilinxsUnidxs.Presenters
             City = building.City;
             ZIP = building.ZIP;
             StateID = building.StateID;
+            StateName = building.State.Name;
             StateAbbreviation = building.State.Abbreviation;
             LandlordID = building.LandlordID;
+            LandlordName = building.Landlord.FullName;
             NeighborhoodID = building.NeighborhoodID;
+            NeighborhoodName = building.Neighborhood.Name;
+            Residences = building.Residences.Select(r => Tuple.Create(r.Name, r.ID)).ToList();
         }
     }
 }

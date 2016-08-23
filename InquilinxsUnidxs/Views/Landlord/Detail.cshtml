@@ -5,3 +5,21 @@
 @Html.ActionLink("Back to Index", "Index")
 
 <h1>Landlord Details</h1>
+
+<div>
+    <label>First Name:</label>
+    @Model.FirstName
+</div>
+
+<div>
+    <label>Last Name:</label>
+    @Model.LastName
+</div>
+
+<div class="form-group">
+    <label><u>Buildings:</u></label>
+    @foreach (var building in Model.Buildings)
+    {
+        <div>@Html.ActionLink(building.Item1, "Detail", "Building", new { buildingID = building.Item2 }, null )</div>
+    }
+</div>

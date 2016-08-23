@@ -13,6 +13,7 @@ namespace DataAccess.Service
             using (var context = this.GetApplicationContext())
             {
                 var model = context.Neighborhoods
+                    .Include("Buildings.State")
                     .OrderBy(n => n.Name)
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize)
@@ -30,6 +31,7 @@ namespace DataAccess.Service
             using (var context = this.GetApplicationContext())
             {
                 return context.Neighborhoods
+                    .Include("Buildings.State")
                     .Single(r => r.ID == neighborhoodID);
             }
         }
