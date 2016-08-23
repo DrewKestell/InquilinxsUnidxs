@@ -165,10 +165,10 @@
     <Compile Include="Services\ResidenceService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\CSS\Bootstrap\bootstrap-theme.css" />
-    <Content Include="Content\CSS\Bootstrap\bootstrap-theme.min.css" />
-    <Content Include="Content\CSS\Bootstrap\bootstrap.css" />
-    <Content Include="Content\CSS\Bootstrap\bootstrap.min.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\JS\Building.js" />
     <Content Include="Content\JS\Global.js" />
     <Content Include="Content\JS\Landlord.js" />
@@ -185,23 +185,19 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\CSS\Bootstrap\bootstrap.min.css.map" />
-    <Content Include="Content\CSS\Bootstrap\bootstrap.css.map" />
-    <Content Include="Content\CSS\Bootstrap\bootstrap-theme.min.css.map" />
-    <Content Include="Content\CSS\Bootstrap\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Properties\PublishProfiles\InquilinxsUnidxs.pubxml" />
-    <None Include="Scripts\jquery-2.2.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-2.2.4.js" />
-    <Content Include="Scripts\jquery-2.2.4.min.js" />
+    <None Include="Scripts\jquery-3.1.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.1.0.js" />
+    <Content Include="Scripts\jquery-3.1.0.min.js" />
+    <Content Include="Scripts\jquery-3.1.0.slim.js" />
+    <Content Include="Scripts\jquery-3.1.0.slim.min.js" />
     <Content Include="Scripts\jquery-to-dictionary.js" />
-    <Content Include="Scripts\jquery-2.2.4.min.map" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-3.4.0.debug.js" />
     <Content Include="Scripts\knockout-3.4.0.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
@@ -257,6 +253,8 @@
     <Content Include="Views\Residence\Detail.cshtml" />
     <Content Include="Views\Residence\_Form.cshtml" />
     <Content Include="Views\Map\Show.cshtml" />
+    <Content Include="Scripts\jquery-3.1.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.0.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -264,7 +262,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
