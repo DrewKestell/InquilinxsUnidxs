@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Newtonsoft.Json;
 
 namespace InquilinxsUnidxs.Controllers
 {
@@ -17,10 +18,14 @@ namespace InquilinxsUnidxs.Controllers
             base.Initialize(requestContext);
         }
 
-        public ActionResult Show()
+        public ActionResult Show(int? neighborhoodID = null, int? landlordID = null, string filter = null)
         {
-            var presenter = _mapService.GetMapPresenter();
-            return this.View(presenter);
+            var presenter = _mapService.GetMapPresenter(neighborhoodID, landlordID, filter);
+
+            if (Request.IsAjaxRequest())
+                return this.Content(JsonConvert.SerializeObject(presenter));
+            else
+                return this.View(presenter);
         }
 
         [HttpPost]

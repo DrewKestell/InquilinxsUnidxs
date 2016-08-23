@@ -1,27 +1,41 @@
 ﻿var Building = function (building) {
     this.id = building.ID;
-    this.address = building.Address;
     this.latitude = building.Latitude;
     this.longitude = building.Longitude;
+    this.fullAddress = building.FullAddress;
+    this.landlordId = building.LandlordID;
+    this.landlordName = building.LandlordName;
+    this.neighborhoodId = building.NeighborhoodID;
+    this.neighborhoodName = building.NeighborhoodName;
+    this.residenceCount = building.ResidenceCount;
+    this.renterCount = building.RenterCount;
 };
 
 var Map = function (presenter) {
     this.buildings = ko.observableArray();
+    this.neighborhoodId = ko.observable();
+    this.landlordId = ko.observable();
+    this.filter = ko.observable();
+    var map;
+    var markers = [];
+
+    this.allNeighborhoods = presenter.AllNeighborhoods;
+    this.allLandlords = presenter.AllLandlords;
 
     // fucking javascript. this function is NASTY.
-    this.populateBuildings = function () {
+    this.populateBuildings = function (buildings) {
         var buildingsToUpdate = [];
         var buildingCounter = 0;
         var counter = 0;
-        _.each(presenter.Buildings, function (building) {
+        _.each(buildings, function (building) {
             if (building.Latitude === 0 && building.Longitude === 0) {
                 buildingCounter++;
             }
         });
-        presenter.Buildings.forEach(function (building) {
+        buildings.forEach(function (building) {
             
             if (building.Latitude === 0 || building.Longitude === 0) {
-                var address = building.Address.replaceAll(' ', '+');
+                var address = building.FullAddress.replaceAll(' ', '+');
                 var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=AIzaSyDZR2L4X7wU8GVxaVfNlPnE47pj39cVAbc';               
                 var lat;
                 var lng;
@@ -54,7 +68,7 @@ var Map = function (presenter) {
             this.drawMap();
         }
     };
-
+     
     this.updateGeolocation = function (buildingsToUpdate) {
         $.ajax('/Map/UpdateGeolocation', {
             method: "POST",
@@ -62,18 +76,18 @@ var Map = function (presenter) {
             data: $.toDictionary(buildingsToUpdate),
             dataType: "text",
             success: function (data) {
-                this.drawMap();
+                this.populateBuildings(data.Buildings);
             },
             error: function (jqXHR) {
-                alert("There was a problem updating the latitude/longitude of one or more buildings.");
+                alert("There was a problem applying filters.");
             }
         });
     };
 
     this.drawMap = function () {
-        var map = new google.maps.Map(document.getElementById('map'), {
-            center: { lat: 45.0094029, lng: -93.2943323 },
-            zoom: 11
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: 44.9790629, lng: -93.268982 },
+            zoom: 12
         });
 
          // can't get addGeoJson working, so we're doing it this way for now
@@ -82,11 +96,53 @@ var Map = function (presenter) {
             var marker = new google.maps.Marker({
                 position: location,
                 map: map,
-                title: building.Address
+                title: building.FullAddress
             });
-        });
-        
+            var contentString =
+            '<div class="info-window">' +
+                '<div><label>Address:</label> <a href="/Building/Detail?buildingID=' + building.id + '">' + building.fullAddress + '</a></div>' +
+                '<div><label>Landlord:</label> <a href="/Landlord/Detail?landlordID=' + building.landlordId + '">' + building.landlordName + '</a></div>' +
+                '<div><label>Neighborhood:</label> <a href="/Neighborhood/Detail?neighborhoodID=' + building.neighborhoodId + '">' + building.neighborhoodName + '</a></div>' +
+                '<div><label>Total Residences:</label>' + ' ' + building.residenceCount + '</div>' +
+                '<div><label>Total Renters:</label>' + ' ' + building.renterCount + '</div>' +
+            '</div>';
+            var infoWindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+            marker.addListener('click', function () {
+                infoWindow.open(map, marker);
+            });
+            markers.push(marker);
+        });        
     };
 
-    this.populateBuildings();
+    this.clearAllMarkers = function () {
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(null);
+        }
+        markers = [];
+    };
+
+    this.applyFilters = function () {
+        $.ajax('/Map/Show', {
+            method: "GET",
+            context: this,
+            dataType: "json",
+            data: {
+                landlordID: this.landlordId(),
+                neighborhoodID: this.neighborhoodId(),
+                filter: this.filter()
+            },
+            success: function (data) {
+                this.buildings([]);
+                this.clearAllMarkers();
+                this.populateBuildings(data.Buildings);
+            },
+            error: function (jqXHR) {
+                alert("There was a problem updating the latitude/longitude of one or more buildings.");
+            }
+        });
+    };
+
+    this.populateBuildings(presenter.Buildings);
 };

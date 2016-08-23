@@ -20,6 +20,6 @@
     <label><u>Renters:</u></label>
     @foreach (var renter in Model.Renters)
     {
-        <div>@Html.ActionLink(renter.Item1, "Detail", "Renter", new { renterID = renter.Item2 }, null)</div>
+        <div>@Html.ActionLink(renter.Item2, "Detail", "Renter", new { renterID = renter.Item1 }, null)</div>
     }
 </div>

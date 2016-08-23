@@ -19,7 +19,7 @@ namespace InquilinxsUnidxs.Presenters
         public string LandlordName { get; private set; }
         public int NeighborhoodID { get; private set; }
         public string NeighborhoodName { get; private set; }
-        public List<Tuple<string, int>> Residences { get; private set; }
+        public List<Tuple<int, string>> Residences { get; private set; }
 
         public List<Tuple<States, string>> AllStates { get; private set; }
         public List<Tuple<int, string>> AllLandlords { get; private set; }
@@ -46,7 +46,7 @@ namespace InquilinxsUnidxs.Presenters
             LandlordName = building.Landlord.FullName;
             NeighborhoodID = building.NeighborhoodID;
             NeighborhoodName = building.Neighborhood.Name;
-            Residences = building.Residences.Select(r => Tuple.Create(r.Name, r.ID)).ToList();
+            Residences = building.Residences.Select(r => Tuple.Create(r.ID, r.Name)).ToList();
         }
     }
 }

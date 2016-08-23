@@ -40,6 +40,6 @@
     <label><u>Residences:</u></label>
     @foreach (var residence in Model.Residences)
     {
-        <div>@Html.ActionLink(residence.Item1, "Detail", "Residence", new { residenceID = residence.Item2 }, null)</div>
+        <div>@Html.ActionLink(residence.Item2, "Detail", "Residence", new { residenceID = residence.Item1 }, null)</div>
     }
 </div>

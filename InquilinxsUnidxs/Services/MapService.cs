@@ -1,18 +1,15 @@
-﻿using DataAccess.Model;
-using InquilinxsUnidxs.Presenters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using InquilinxsUnidxs.Presenters;
 
 namespace InquilinxsUnidxs.Services
 {
     public class MapService : DataAccess.Service.MapService
     {
-        public MapPresenter GetMapPresenter()
+        public MapPresenter GetMapPresenter(int? neighborhoodID, int? landlordID, string filter)
         {
-            var buildings = base.GetBuildings();
-            return new MapPresenter(buildings);
+            var buildings = base.GetBuildings(neighborhoodID, landlordID, filter);
+            var neighborhoods = base.GetNeighborhoods();
+            var landlords = base.GetLandlords();
+            return new MapPresenter(buildings, neighborhoods, landlords);
         }       
     }
 }

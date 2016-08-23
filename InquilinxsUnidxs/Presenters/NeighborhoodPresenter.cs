@@ -9,7 +9,7 @@ namespace InquilinxsUnidxs.Presenters
     {
         public int ID { get; private set; }
         public string Name { get; private set; }
-        public List<Tuple<string, int>> Buildings { get; private set; }
+        public List<Tuple<int, string>> Buildings { get; private set; }
 
         public NeighborhoodPresenter() { }
 
@@ -17,7 +17,7 @@ namespace InquilinxsUnidxs.Presenters
         {
             ID = neighborhood.ID;
             Name = neighborhood.Name;
-            Buildings = neighborhood.Buildings.Select(b => Tuple.Create(b.FullAddress, b.ID)).ToList();
+            Buildings = neighborhood.Buildings.Select(b => Tuple.Create(b.ID, b.FullAddress)).ToList();
         }
     }
 }

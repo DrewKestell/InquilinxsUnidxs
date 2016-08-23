@@ -15,6 +15,6 @@
     <label><u>Buildings:</u></label>
     @foreach (var building in Model.Buildings)
     {
-        <div>@Html.ActionLink(building.Item1, "Detail", "Building", new { buildingID = building.Item2 }, null)</div>
+        <div>@Html.ActionLink(building.Item2, "Detail", "Building", new { buildingID = building.Item1 }, null)</div>
     }
 </div>
