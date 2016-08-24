@@ -1,0 +1,67 @@
+﻿@using InquilinxsUnidxs.Presenters
+@using Newtonsoft.Json
+@using System.Web.Mvc.Html
+
+@model PaginationPresenter<RenterPresenter>
+
+@{ 
+    var index = JsonConvert.SerializeObject(Model.Model);
+}
+
+@section scripts
+{
+    <script src="~/Content/JS/Renter.js"></script>
+
+    <script>
+        var container = document.getElementById("renter-index");
+        var vm = new RenterIndex(@Html.Raw(index));
+        ko.applyBindings(vm, container);
+    </script>
+}
+
+<h1>Renter Index</h1>
+
+<div class="form-group">
+    @Html.ActionLink("New", "New", null, new { @class = "btn btn-primary" })
+</div>
+
+@if (Model.TotalRecords > 0)
+{
+    <div id="renter-index">
+        <table class="table table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Address</th>
+                    <th>Residence</th>
+                    <th>Details</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ko foreach: renters -->
+                <tr>
+                    <td data-bind="text: firstName"></td>
+                    <td data-bind="text: lastName"></td>
+                    <td data-bind="text: address"></td>
+                    <td data-bind="text: residence"></td>
+                    <td><a data-bind="attr: { href: detailLink }">Detail</a></td>
+                    <td><a data-bind="attr: { href: editLink }">Edit</a></td>
+                    <td><a href="#" data-bind="click: $root.deleteRenter.bind($root, $data)">Delete</a></td>
+                </tr>
+                <!-- /ko -->
+            </tbody>
+        </table>
+    </div>
+
+    if (Model.TotalPages > 1)
+    {
+        @Html.Partial("_Pagination", Model)
+    }
+}
+else
+{
+ <div class="no-data">No Renters Found</div>
+}

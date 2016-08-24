@@ -1,0 +1,27 @@
+﻿@using InquilinxsUnidxs.Presenters
+
+@model RenterPresenter
+
+@Html.ActionLink("Back to Index", "Index")
+
+<h1>Renter Details</h1>
+
+<div>
+    <label>First Name:</label>
+    @Model.FirstName
+</div>
+
+<div>
+    <label>Last Name:</label>
+    @Model.LastName
+</div>
+
+<div>
+    <label>Building:</label>
+    @Html.ActionLink(Model.Address, "Detail", "Building", new { buildingID = Model.BuildingID }, null)
+</div>
+
+<div>
+    <label>Residence:</label>
+    @Html.ActionLink(Model.ResidenceName, "Detail", "Residence", new { residenceID = Model.ResidenceID }, null)
+</div>

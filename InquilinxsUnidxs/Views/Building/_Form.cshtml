@@ -1,0 +1,37 @@
+﻿@using InquilinxsUnidxs.Presenters
+
+@model BuildingPresenter
+
+@Html.Partial("_KOErrors")
+
+<div class="form-group">
+    <label for="landlord">Landlord<abbr class="required" title="This field is required"> *</abbr></label>
+    <select class="form-control" id="landlord" data-bind="options: allLandlords, optionsValue: 'Item1', optionsText: 'Item2', value: landlordId, optionsCaption: 'Choose a Landlord...'"></select>
+</div>
+
+<div class="form-group">
+    <label for="landlord">Neighborhood<abbr class="required" title="This field is required"> *</abbr></label>
+    <select class="form-control" id="neighborhood" data-bind="options: allNeighborhoods, optionsValue: 'Item1', optionsText: 'Item2', value: neighborhoodId, optionsCaption: 'Choose a Neighborhood...'"></select>
+</div>
+
+<div class="form-group">
+    <label for="address">Address<abbr class="required" title="This field is required"> *</abbr></label>
+    <input class="form-control" id="address" type="text" data-bind="value: address" />
+</div>
+
+<div class="form-group">
+    <label for="city">City<abbr class="required" title="This field is required"> *</abbr></label>
+    <input class="form-control" id="city" type="text" data-bind="value: city" />
+</div>
+
+<div class="form-group">
+    <label for="state">State<abbr class="required" title="This field is required"> *</abbr></label>
+    <select class="form-control" id="state" data-bind="options: allStates, optionsValue: 'Item1', optionsText: 'Item2', value: stateId, optionsCaption: 'Choose a State...'"></select>
+</div>
+
+<div class="form-group">
+    <label for="zip">ZIP<abbr class="required" title="This field is required"> *</abbr></label>
+    <input class="form-control" id="zip" type="text" data-bind="value: zip" />
+</div>
+
+<a href="#" class="btn btn-primary" data-bind="click: save">Save</a>

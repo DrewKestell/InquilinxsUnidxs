@@ -1,0 +1,114 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 20px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.entity-validation-results-container {
+    padding: 10px;
+    margin: 20px 0;
+}
+
+.entity-validation-errors-container {
+    margin-left: 1em;
+}
+
+.entity-validation-errors {
+    margin-left: 1em;
+}
+
+.entity-validation-container {
+    margin-bottom: 15px;
+}
+
+.pagination {
+    margin: 0;
+    padding-right: 10px;
+}
+
+.page-count {
+    line-height: 34px;
+    vertical-align: top;
+}
+
+.input-group-addon, .input-group-btn {
+    width: auto;
+}
+
+.site-footer {
+    border: 1px solid transparent; /* hack to get margin-top working with clear: both. i'm bad at CSS. */
+    clear: both;
+}
+
+.header-user-info {
+    color: white;
+    font-size: 120%;
+    padding: 15px 10px;
+}
+
+span.bg-danger {    
+    padding: 5px 10px;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+span.bg-success {    
+    padding: 5px 10px;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+abbr[title], abbr[data-original-title] {
+    border-bottom: none;    
+}
+
+abbr.required {
+    color: red;
+    font-size: 120%;
+}
+
+.no-data {
+    padding: 50px;
+    text-align: center;
+    background-color: #f8f8f8;
+    text-transform: uppercase;
+    font-size: 18px;
+}
+
+.footer-link {
+    margin-right: 10px;    
+}
+
+.footer-nav {
+    margin-bottom: 15px;
+}
+
+.map-controls {
+    margin-top: 10px;
+    margin-bottom: 22px;
+}
+
+.map { 
+    height:800px;
+    box-shadow: 0 0 5px #5e5e5e;
+}

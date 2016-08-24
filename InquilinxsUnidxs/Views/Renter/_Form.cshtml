@@ -1,0 +1,29 @@
+﻿@using InquilinxsUnidxs.Presenters
+
+@model RenterPresenter
+
+@Html.Partial("_KOErrors")
+
+<div class="form-group">
+    <label for="first-name">First Name<abbr class="required" title="This field is required"> *</abbr></label>
+    <input class="form-control" id="first-name" type="text" data-bind="value: firstName" />
+</div>
+
+<div class="form-group">
+    <label for="last-name">Last Name<abbr class="required" title="This field is required"> *</abbr></label>
+    <input class="form-control" id="last-name" type="text" data-bind="value: lastName" />
+</div>
+
+<div class="form-group">
+    <label for="building">Building<abbr class="required" title="This field is required"> *</abbr></label>
+    <select class="form-control" id="building" data-bind="options: allBuildings, optionsValue: 'Item1', optionsText: 'Item2', value: buildingId, optionsCaption: 'Choose a Building...'"></select>
+</div>
+
+<!-- ko if: buildingId -->
+<div class="form-group">
+    <label for="residence">Residence<abbr class="required" title="This field is required"> *</abbr></label>
+    <select class="form-control" id="residence" data-bind="options: residences, optionsValue: 'Item1', optionsText: 'Item2', value: residenceId, optionsCaption: 'Choose a Residence...'"></select>
+</div>
+<!-- /ko -->
+
+<a href="#" class="btn btn-primary" data-bind="click: save">Save</a>

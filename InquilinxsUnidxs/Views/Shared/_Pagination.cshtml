@@ -1,0 +1,65 @@
+﻿@using InquilinxsUnidxs.Presenters
+
+@model IPaginationPresenter
+
+@{ 
+    var baseUrl = Request.Url;
+    var queryStringParams = HttpUtility.ParseQueryString(baseUrl.Query);
+    queryStringParams.Remove("page");
+
+    var firstPageDisabledClass = Model.Page == 1 ? "disabled" : "";
+    var firstPageLink = Model.Page != 1 ? Model.Url(baseUrl, 1, Model.PageSize) : "#";
+    var firstPageClass = Model.Page != 1 ? "first-page" : "";
+
+    var previousPageDisabledClass = Model.Page == 1 ? "disabled" : "";
+    var previousPageLink = Model.Page != 1 ? Model.Url(baseUrl, Model.Page - 1, Model.PageSize) : "#";
+    var previousPageClass = Model.Page != 1 ? "previous-page" : "";
+
+    var nextPageDisabledClass = Model.Page == Model.TotalPages ? "disabled" : "";
+    var nextPageLink = Model.Page != Model.TotalPages ? Model.Url(baseUrl, Model.Page + 1, Model.PageSize) : "#";
+    var nextPageClass = Model.Page != Model.TotalPages ? "next-page" : "";
+
+    var lastPageDisabledClass = Model.Page == Model.TotalPages ? "disabled" : "";
+    var lastPageLink = Model.Page != Model.TotalPages ? Model.Url(baseUrl, Model.TotalPages, Model.PageSize) : "#";
+    var lastPageClass = Model.Page != Model.TotalPages ? "last-page" : "";
+}
+
+@if (Model.TotalRecords > 0)
+{
+    <div class="pagination-container">
+        <div class="pull-left">
+            <ul class="pagination">
+                <li class="@firstPageDisabledClass">
+                    <a href="@firstPageLink" class="@firstPageClass">&laquo;</a>
+                </li>
+                <li class="@previousPageDisabledClass">
+                    <a href="@previousPageLink" class="@previousPageClass">&lsaquo;</a>
+                </li>
+                <li class="@nextPageDisabledClass">
+                    <a href="@nextPageLink" class="@nextPageClass">&rsaquo;</a>
+                </li>
+                <li class="@lastPageDisabledClass">
+                    <a href="@lastPageLink" class="@lastPageClass">&raquo;</a>
+                </li>
+            </ul>
+            <span class="page-count">Page @this.Model.Page of @this.Model.TotalPages</span>
+        </div>  
+        <div class="pull-right">
+            <form action="@baseUrl" method="get" class="pagination-form">
+                @foreach (var key in queryStringParams.Keys)
+                {
+                    <input type="hidden" name="@key.ToString()" value="@Convert.ToString(queryStringParams[key.ToString()])" />
+                }
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        Go to page
+                    </span>
+                    <input name="page" type="number" class="input form-control" min="1" max="@this.Model.TotalPages" value="@this.Model.Page" step="1" />
+                    <span class="input-group-btn">
+                        <input type="submit" class="btn btn-primary" value="Update" />
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+}

@@ -1,0 +1,12 @@
+﻿@using InquilinxsUnidxs.Presenters
+
+@model NeighborhoodPresenter
+
+@Html.Partial("_KOErrors")
+
+<div class="form-group">
+    <label for="name">Name<abbr class="required" title="This field is required"> *</abbr></label>
+    <input class="form-control" id="name" type="text" data-bind="value: name" />
+</div>
+
+<a href="#" class="btn btn-primary" data-bind="click: save">Save</a>

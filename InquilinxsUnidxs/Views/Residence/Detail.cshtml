@@ -1,0 +1,25 @@
+﻿@using InquilinxsUnidxs.Presenters
+
+@model ResidencePresenter
+
+@Html.ActionLink("Back to Index", "Index")
+
+<h1>Residence Details</h1>
+
+<div>
+    <label>Building:</label>
+    @Html.ActionLink(Model.BuildingAddress, "Detail", "Building", new { buildingID = Model.BuildingID }, null)
+</div>
+
+<div>
+    <label>Name:</label>
+    @Model.Name
+</div>
+
+<div class="form-group">
+    <label><u>Renters:</u></label>
+    @foreach (var renter in Model.Renters)
+    {
+        <div>@Html.ActionLink(renter.Item2, "Detail", "Renter", new { renterID = renter.Item1 }, null)</div>
+    }
+</div>
