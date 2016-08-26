@@ -1,4 +1,5 @@
-﻿using DataAccess.DTO;
+﻿using DataAccess.Context;
+using DataAccess.DTO;
 using DataAccess.FormObject;
 using DataAccess.Model;
 using System;
@@ -42,6 +43,7 @@ namespace DataAccess.Service
                     .Include("Landlord")
                     .Include("Neighborhood")
                     .Include("Residences")
+                    .Include("BuildingComments")
                     .OrderBy(b => b.State.Name)
                     .ThenBy(b => b.City)
                     .ThenBy(b => b.Address)
@@ -65,16 +67,17 @@ namespace DataAccess.Service
                     .Include("Landlord")
                     .Include("Neighborhood")
                     .Include("Residences")
+                    .Include("BuildingComments")
                     .Single(r => r.ID == buildingID);
             }
         }
 
         // TODO: share code with Update
-        protected void Create(BuildingFormObject formObject)
+        protected void Create(BuildingFormObject formObject, User currentUser)
         {
             using (var context = this.GetApplicationContext())
             {
-                context.Buildings.Add(new Building
+                var newBuilding = new Building
                 {
                     Latitude = 0, // handled by Google Geocoding API on front end
                     Longitude = 0, // handled by Google Geocoding API on front end
@@ -84,13 +87,17 @@ namespace DataAccess.Service
                     StateID = formObject.StateID,
                     LandlordID = formObject.LandlordID,
                     NeighborhoodID = formObject.NeighborhoodID
-                });
+                };
+                context.Buildings.Add(newBuilding);
+
+                UpdateBuildingComments(formObject, newBuilding, context, currentUser);
+
                 context.SaveChanges();
             }
         }
 
         // TODO: share code with Create
-        protected void Update(BuildingFormObject formObject)
+        protected void Update(BuildingFormObject formObject, User currentUser)
         {
             using (var context = this.GetApplicationContext())
             {
@@ -101,7 +108,38 @@ namespace DataAccess.Service
                 building.StateID = formObject.StateID;
                 building.LandlordID = formObject.LandlordID;
                 building.NeighborhoodID = formObject.NeighborhoodID;
+
+                UpdateBuildingComments(formObject, building, context, currentUser);
+
                 context.SaveChanges();
+            }
+        }
+
+        private void UpdateBuildingComments(BuildingFormObject formObject, Building building, ApplicationContext context, User currentUser)
+        {
+            var existingCommentIds = building.BuildingComments.Select(b => b.ID);
+            var postedCommentIds = formObject.BuildingComments.Select(b => b.ID);
+            var commentsToRemove = building.BuildingComments.Where(b => !postedCommentIds.Contains(b.ID));
+
+            context.BuildingComments.RemoveRange(commentsToRemove);
+
+            foreach (var comment in formObject.BuildingComments)
+            {
+                BuildingComment buildingComment;
+                if (comment.ID == 0)
+                {
+                    buildingComment = new BuildingComment
+                    {
+                        DateCreated = DateTime.Now
+                    };
+                    building.BuildingComments.Add(buildingComment);
+                }
+                else
+                    buildingComment = building.BuildingComments.Single(c => c.ID == comment.ID);
+
+                buildingComment.Comment = comment.Comment;
+                buildingComment.LastUpdated = DateTime.Now;
+                buildingComment.UserID = currentUser.ID;
             }
         }
 

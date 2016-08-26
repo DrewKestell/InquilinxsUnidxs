@@ -112,3 +112,7 @@ abbr.required {
     height:800px;
     box-shadow: 0 0 5px #5e5e5e;
 }
+
+.building-form .glyphicon-remove {
+    color: red;
+}

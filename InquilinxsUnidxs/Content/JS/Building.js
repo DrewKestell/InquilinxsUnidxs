@@ -1,4 +1,9 @@
-﻿var Building = function (building) {
+﻿var BuildingComment = function (buildingComment) {
+    this.id = buildingComment.ID;
+    this.comment = buildingComment.Comment;
+};
+
+var Building = function (building) {
     this.id = building.ID;
     this.landlordId = ko.observable(building.LandlordID);
     this.neighborhoodId = ko.observable(building.NeighborhoodID);
@@ -7,6 +12,10 @@
     this.stateAbbreviation = building.StateAbbreviation;
     this.stateId = ko.observable(building.StateID);
     this.zip = ko.observable(building.ZIP);
+
+    this.buildingComments = ko.observableArray(_.map(building.BuildingComments, function (building) {
+        return new BuildingComment(building);
+    }));
 
     this.allStates = building.AllStates;
     this.allLandlords = building.AllLandlords;
@@ -23,6 +32,14 @@
     }, this);
 
     var isNewBuilding = !!document.getElementById("new-building-form");
+
+    this.addBuildingComment = function () {
+        this.buildingComments.push(new BuildingComment({}));
+    };
+
+    this.removeBuildingComment = function (buildingComment) {
+        this.buildingComments.remove(buildingComment);
+    }.bind(this);
 
     this.save = function () {
         var url;

@@ -8,6 +8,7 @@ namespace DataAccess.Model
         public Residence()
         {
             Renters = new HashSet<Renter>();
+            ResidenceComments = new HashSet<ResidenceComment>();
         }
 
         public int ID { get; set; }
@@ -20,5 +21,7 @@ namespace DataAccess.Model
         public virtual Building Building { get; set; }
 
         public virtual ICollection<Renter> Renters { get; set; }
+
+        public virtual ICollection<ResidenceComment> ResidenceComments { get; set; }
     }
 }

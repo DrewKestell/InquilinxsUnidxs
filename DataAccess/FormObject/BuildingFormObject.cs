@@ -1,4 +1,5 @@
 ﻿using DataAccess.Enum;
+using System.Collections.Generic;
 
 namespace DataAccess.FormObject
 {
@@ -11,5 +12,11 @@ namespace DataAccess.FormObject
         public States StateID { get; set; }
         public int LandlordID { get; set; }
         public int NeighborhoodID { get; set; }
+        public List<BuildingCommentFormObject> BuildingComments { get; set; }
+
+        public BuildingFormObject()
+        {
+            BuildingComments = new List<BuildingCommentFormObject>();
+        }
     }
 }
