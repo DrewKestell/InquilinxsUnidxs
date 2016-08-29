@@ -1,4 +1,5 @@
 ﻿using DataAccess.FormObject;
+using DataAccess.Model;
 using InquilinxsUnidxs.Presenters;
 using System.Linq;
 
@@ -24,14 +25,14 @@ namespace InquilinxsUnidxs.Services
             return new ResidencePresenter(base.GetResidence(residenceID), base.GetBuildings());
         }
 
-        public new void Create(ResidenceFormObject formObject)
+        public new void Create(ResidenceFormObject formObject, User currentUser)
         {
-            base.Create(formObject);
+            base.Create(formObject, currentUser);
         }
 
-        public new void Update(ResidenceFormObject formObject)
+        public new void Update(ResidenceFormObject formObject, User currentUser)
         {
-            base.Update(formObject);
+            base.Update(formObject, currentUser);
         }
 
         public new void Delete(int residenceID)

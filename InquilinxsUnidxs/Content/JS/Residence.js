@@ -1,8 +1,17 @@
-﻿var Residence = function (residence) {
+﻿var ResidenceComment = function (residenceComment) {
+    this.id = residenceComment.ID;
+    this.comment = residenceComment.Comment;
+};
+
+var Residence = function (residence) {
     this.id = residence.ID;
     this.name = ko.observable(residence.Name);
     this.buildingId = ko.observable(residence.BuildingID);
     this.buildingAddress = residence.BuildingAddress;
+
+    this.residenceComments = ko.observableArray(_.map(residence.ResidenceComments, function (residence) {
+        return new ResidenceComment(residence);
+    }));
 
     this.allBuildings = residence.AllBuildings;
 
@@ -17,6 +26,14 @@
     }, this);
 
     var isNewResidence = !!document.getElementById("new-residence-form");
+
+    this.addResidenceComment = function () {
+        this.residenceComments.push(new ResidenceComment({}));
+    };
+
+    this.removeResidenceComment = function (residenceComment) {
+        this.residenceComments.remove(residenceComment);
+    }.bind(this);
 
     this.save = function () {
         var url;

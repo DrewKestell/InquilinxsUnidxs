@@ -4,14 +4,30 @@
 
 @Html.Partial("_KOErrors")
 
-<div class="form-group">
-    <label for="building">Building<abbr class="required" title="This field is required"> *</abbr></label>
-    <select class="form-control" id="building" data-bind="options: allBuildings, optionsValue: 'Item1', optionsText: 'Item2', value: buildingId, optionsCaption: 'Choose a Building...'"></select>
-</div>
+<div class="row residence-form">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="building">Building<abbr class="required" title="This field is required"> *</abbr></label>
+            <select class="form-control" id="building" data-bind="options: allBuildings, optionsValue: 'Item1', optionsText: 'Item2', value: buildingId, optionsCaption: 'Choose a Building...'"></select>
+        </div>
 
-<div class="form-group">
-    <label for="name">Name<abbr class="required" title="This field is required"> *</abbr></label>
-    <input class="form-control" id="name" type="text" data-bind="value: name" />
+        <div class="form-group">
+            <label for="name">Name<abbr class="required" title="This field is required"> *</abbr></label>
+            <input class="form-control" id="name" type="text" data-bind="value: name" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h3>Comments</h3>
+        <!-- ko foreach: residenceComments -->
+        <div class="form-group">
+            <div class="input-group">
+                <input type="text" class="form-control" data-bind="value: comment" />
+                <div class="input-group-addon" data-bind="click: $parent.removeResidenceComment"><span class="glyphicon glyphicon-remove"></span></div>
+            </div>
+        </div>
+        <!-- /ko -->
+        <a href="#" class="btn btn-primary" data-bind="click: addResidenceComment">Add Comment</a>
+    </div>
 </div>
 
 <a href="#" class="btn btn-primary" data-bind="click: save">Save</a>

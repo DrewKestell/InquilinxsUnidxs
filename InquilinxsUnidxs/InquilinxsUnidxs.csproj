@@ -154,6 +154,7 @@
     <Compile Include="Presenters\NeighborhoodPresenter.cs" />
     <Compile Include="Presenters\PaginationPresenter.cs" />
     <Compile Include="Presenters\RenterPresenter.cs" />
+    <Compile Include="Presenters\ResidenceCommentPresenter.cs" />
     <Compile Include="Presenters\ResidencePresenter.cs" />
     <Compile Include="Presenters\StatePresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

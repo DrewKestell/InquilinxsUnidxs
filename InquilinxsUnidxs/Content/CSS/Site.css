@@ -113,6 +113,10 @@ abbr.required {
     box-shadow: 0 0 5px #5e5e5e;
 }
 
-.building-form .glyphicon-remove {
+.building-form .glyphicon-remove, .residence-form .glyphicon-remove {
     color: red;
+}
+
+[data-bind*='click:'] {
+    cursor: pointer;
 }

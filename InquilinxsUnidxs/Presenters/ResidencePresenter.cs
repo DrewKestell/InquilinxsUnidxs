@@ -12,6 +12,7 @@ namespace InquilinxsUnidxs.Presenters
         public int BuildingID { get; private set; }
         public string BuildingAddress { get; private set; }
         public List<Tuple<int, string>> Renters { get; private set; }
+        public List<ResidenceCommentPresenter> ResidenceComments { get; private set; }
 
         public List<Tuple<int, string>> AllBuildings { get; private set; }
 
@@ -30,6 +31,7 @@ namespace InquilinxsUnidxs.Presenters
             BuildingID = residence.BuildingID;
             BuildingAddress = residence.Building.FullAddress;
             Renters = residence.Renters.Select(r => Tuple.Create(r.ID, r.FullName)).ToList();
+            ResidenceComments = residence.ResidenceComments.Select(c => new ResidenceCommentPresenter(c)).ToList();
         }
     }
 }

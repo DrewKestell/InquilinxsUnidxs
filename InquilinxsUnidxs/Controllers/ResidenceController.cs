@@ -47,7 +47,7 @@ namespace InquilinxsUnidxs.Controllers
         {
             try
             {
-                _residenceService.Create(formObject);
+                _residenceService.Create(formObject, this.CurrentUser);
                 return this.Content(JsonConvert.SerializeObject("/Residence/Index"));
             }
             catch (DbEntityValidationException ex)
@@ -63,7 +63,7 @@ namespace InquilinxsUnidxs.Controllers
         {
             try
             {
-                _residenceService.Update(formObject);
+                _residenceService.Update(formObject, this.CurrentUser);
                 return Content(JsonConvert.SerializeObject("/Residence/Index"));
             }
             catch (DbEntityValidationException ex)

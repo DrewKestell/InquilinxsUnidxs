@@ -58,6 +58,7 @@
     <Compile Include="FormObject\LandlordFormObject.cs" />
     <Compile Include="FormObject\MapBuildingFormObject.cs" />
     <Compile Include="FormObject\NeighborhoodFormObject.cs" />
+    <Compile Include="FormObject\ResidenceCommentFormObject.cs" />
     <Compile Include="FormObject\ResidenceFormObject.cs" />
     <Compile Include="Model\Building.cs" />
     <Compile Include="Model\BuildingComment.cs" />

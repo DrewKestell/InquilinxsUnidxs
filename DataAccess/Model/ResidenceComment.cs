@@ -9,7 +9,7 @@ namespace DataAccess.Model
 
         public DateTime DateCreated { get; set; }
 
-        public DateTime LastUpdatd { get; set; }
+        public DateTime LastUpdated { get; set; }
 
         [Required]
         public string Comment { get; set; }
