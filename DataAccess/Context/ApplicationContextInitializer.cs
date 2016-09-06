@@ -13,6 +13,9 @@ namespace DataAccess.Context
             var stateSeeder = new StateSeeder();
             stateSeeder.Seed(context);
 
+            var fileTypeSeeder = new FileTypeSeeder();
+            fileTypeSeeder.Seed(context);
+
             var landlordSeeder = new LandlordSeeder();
             landlordSeeder.Seed(context);
             context.SaveChanges();

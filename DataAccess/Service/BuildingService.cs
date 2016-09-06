@@ -2,9 +2,12 @@
 using DataAccess.DTO;
 using DataAccess.FormObject;
 using DataAccess.Model;
+using Microsoft.WindowsAzure.Storage;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Web;
 
 namespace DataAccess.Service
 {
@@ -150,6 +153,20 @@ namespace DataAccess.Service
                 var building = context.Buildings.Single(r => r.ID == buildingID);
                 context.Buildings.Remove(building);
                 context.SaveChanges();
+            }
+        }
+
+        protected void UploadFile(HttpPostedFileBase file)
+        {
+            using (var context = this.GetApplicationContext())
+            {
+                var connectionString = ConfigurationManager.AppSettings["StorageConnectionString"];
+                var storageAccount = CloudStorageAccount.Parse(connectionString);
+                var blobClient = storageAccount.CreateCloudBlobClient();
+                var blobContainer = blobClient.GetContainerReference("inquilinxsunidxs");
+                var blockBlob = blobContainer.GetBlockBlobReference("testblob");
+
+                blockBlob.UploadFromStream(file.InputStream);
             }
         }
     }

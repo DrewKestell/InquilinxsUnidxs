@@ -3,6 +3,7 @@ using InquilinxsUnidxs.Presenters;
 using InquilinxsUnidxs.Services;
 using Newtonsoft.Json;
 using System.Data.Entity.Validation;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -72,6 +73,13 @@ namespace InquilinxsUnidxs.Controllers
                 var presenter = new EntityValidationResultPresenter(ex);
                 return this.Content(JsonConvert.SerializeObject(presenter));
             }
+        }
+
+        [HttpPost]
+        public ActionResult UploadFile(HttpPostedFileBase file)
+        {
+            _buildingService.UploadFile(file);
+            return null;
         }
 
         [HttpDelete]

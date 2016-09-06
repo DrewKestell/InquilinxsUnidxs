@@ -2,6 +2,7 @@
 using DataAccess.Model;
 using InquilinxsUnidxs.Presenters;
 using System.Linq;
+using System.Web;
 
 namespace InquilinxsUnidxs.Services
 {
@@ -40,6 +41,11 @@ namespace InquilinxsUnidxs.Services
         public new void Delete(int buildingID)
         {
             base.Delete(buildingID);
+        }
+
+        public new void UploadFile(HttpPostedFileBase file)
+        {
+            base.UploadFile(file);
         }
     }
 }

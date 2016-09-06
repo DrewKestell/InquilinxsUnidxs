@@ -10,6 +10,8 @@ namespace DataAccess.Context
 
         public virtual DbSet<BuildingComment> BuildingComments { get; set; }
         public virtual DbSet<Building> Buildings { get; set; }
+        public virtual DbSet<FileType> FileTypes { get; set; }
+        public virtual DbSet<File> Files { get; set; }
         public virtual DbSet<Landlord> Landlords { get; set; }
         public virtual DbSet<Neighborhood> Neighborhoods { get; set; }
         public virtual DbSet<Renter> Renters { get; set; }

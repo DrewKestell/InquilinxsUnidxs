@@ -18,10 +18,15 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
+/* Uh, why? */
+/*input,
 select,
 textarea {
     max-width: 280px;
+}*/
+
+.pagination-container .input-group-addon, .pagination-container .input-group-btn {
+    width: auto;
 }
 
 .entity-validation-results-container {
@@ -49,10 +54,6 @@ textarea {
 .page-count {
     line-height: 34px;
     vertical-align: top;
-}
-
-.input-group-addon, .input-group-btn {
-    width: auto;
 }
 
 .site-footer {
@@ -117,6 +118,15 @@ abbr.required {
     color: red;
 }
 
-[data-bind*='click:'] {
+[data-bind*='click:'], [data-toggle='modal'] {
     cursor: pointer;
+}
+
+.new-comment, .new-image {
+    margin-left: 10px;
+}
+
+.building-image {
+    min-height: 200px;
+    border: 1px solid gray;
 }
