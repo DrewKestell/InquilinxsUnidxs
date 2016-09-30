@@ -71,7 +71,7 @@ namespace DataAccess.Service
             return difference == 0;
         }
 
-        private string CreatePasswordHash(string password)
+        public string CreatePasswordHash(string password)
         {
             var salt = GenerateRandomSalt();
             var iterationCount = IterationCount;
