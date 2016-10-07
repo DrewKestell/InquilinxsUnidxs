@@ -12,9 +12,6 @@ namespace DataAccess.Context
 
             // uncomment this if test data is needed
 
-            //var stateSeeder = new StateSeeder();
-            //stateSeeder.Seed(context);
-
             //var fileTypeSeeder = new FileTypeSeeder();
             //fileTypeSeeder.Seed(context);
 
@@ -41,6 +38,9 @@ namespace DataAccess.Context
             //var userSeeder = new UserSeeder();
             //userSeeder.Seed(context);
             //context.SaveChanges(); 
+
+            var stateSeeder = new StateSeeder();
+            stateSeeder.Seed(context);
         }
     }
 }
