@@ -50,6 +50,8 @@
         </div>
     </div>
 
+    <a href="#" class="btn btn-primary" data-bind="click: save">Save</a>
+
     @*<div class="row">
         <div class="col-md-12">
             <label>Images</label><a class="new-image" data-toggle="modal" data-target="#myModal" data-bind="click: addBuildingImage">Add Image</a>
@@ -69,8 +71,6 @@
     </div>
 
     <img src="@Html.Action("GetFileURL", "File", new { fileID = 1 } )" />
-
-    <a href="#" class="btn btn-primary" data-bind="click: save">Save</a>
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
