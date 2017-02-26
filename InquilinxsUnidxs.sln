@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InquilinxsUnidxs", "InquilinxsUnidxs\InquilinxsUnidxs.csproj", "{F141F4AD-3D30-4A9F-9C69-B444EB859CDC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C490D76E-D082-4E94-88D9-AB266B8446AC} = {C490D76E-D082-4E94-88D9-AB266B8446AC}
+		{8CCA1B85-0670-4702-BA41-C61889EE74D4} = {8CCA1B85-0670-4702-BA41-C61889EE74D4}
+		{E70543CC-B34F-4D6A-A8A7-225183C2B063} = {E70543CC-B34F-4D6A-A8A7-225183C2B063}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{8CCA1B85-0670-4702-BA41-C61889EE74D4}"
 EndProject
