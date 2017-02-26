@@ -1,84 +1,81 @@
 ﻿using DataAccess.FormObject;
-using InquilinxsUnidxs.Presenters;
-using InquilinxsUnidxs.Services;
-using Newtonsoft.Json;
 using System.Data.Entity.Validation;
+using System.Linq;
+using System.Net;
 using System.Web.Mvc;
-using System.Web.Routing;
+using UseCases;
+using UseCases.Presenters;
 
 namespace InquilinxsUnidxs.Controllers
 {
-    public class ResidenceController : ApplicationController
+    public class ResidenceController : Controller
     {
-        private ResidenceService _residenceService;
+        readonly IResidenceUseCases useCases;
 
-        protected override void Initialize(RequestContext requestContext)
+        public ResidenceController(IResidenceUseCases useCases)
         {
-            _residenceService = new ResidenceService();
-            base.Initialize(requestContext);
+            this.useCases = useCases;
         }
 
-        public ActionResult Index(int page = 1, int pageSize = 10)
-        {
-            var presenters = _residenceService.GetResidencePresenters(page, pageSize);
-            return this.View(presenters);
-        }
+        [HttpGet]
+        public ActionResult Index(int page = 1, int pageSize = 10) => View(useCases.GetResidences.Execute(page, pageSize));
 
-        public ActionResult New()
-        {
-            var presenter = _residenceService.GetNewResidencePresenter();
-            return this.View(presenter);
-        }
+        [HttpGet]
+        public ActionResult New() => View(useCases.NewResidence.Execute());
 
-        public ActionResult Detail(int residenceID)
-        {
-            var presenter = _residenceService.GetResidencePresenter(residenceID);
-            return this.View(presenter);
-        }
+        [HttpGet]
+        public ActionResult Detail(int residenceID) => View(useCases.ViewResidence.Execute(residenceID));
 
-        public ActionResult Edit(int residenceID)
-        {
-            var presenter = _residenceService.GetResidencePresenter(residenceID);
-            return this.View(presenter);
-        }
+        [HttpGet]
+        public ActionResult Edit(int residenceID) => View(useCases.EditResidence.Execute(residenceID));
 
         [HttpPost]
-        public ContentResult Create(ResidenceFormObject formObject)
+        public JsonResult Create(ResidenceFormObject formObject)
         {
             try
             {
-                _residenceService.Create(formObject, this.CurrentUser);
-                return this.Content(JsonConvert.SerializeObject("/Residence/Index"));
+                useCases.CreateResidence.Execute(formObject, 1); // FIXME: this should pass in the current user ID
+                return Json("/Residence/Index", JsonRequestBehavior.AllowGet);
             }
             catch (DbEntityValidationException ex)
             {
-                this.SetUnprocessableEntityResponse();
-                var presenter = new EntityValidationResultPresenter(ex);
-                return this.Content(JsonConvert.SerializeObject(presenter));
+                SetUnprocessableEntityResponse();
+                return Json(ex.EntityValidationErrors.Select(e => new EntityValidationErrorsPresenter(e)));
             }
         }
 
         [HttpPost]
-        public ContentResult Update(ResidenceFormObject formObject)
+        public JsonResult Update(ResidenceFormObject formObject)
         {
             try
             {
-                _residenceService.Update(formObject, this.CurrentUser);
-                return Content(JsonConvert.SerializeObject("/Residence/Index"));
+                useCases.UpdateResidence.Execute(formObject, 1); // FIXME: this should pass in the current user ID
+                return Json("/Residence/Index", JsonRequestBehavior.AllowGet);
             }
             catch (DbEntityValidationException ex)
             {
-                this.SetUnprocessableEntityResponse();
-                var presenter = new EntityValidationResultPresenter(ex);
-                return this.Content(JsonConvert.SerializeObject(presenter));
+                SetUnprocessableEntityResponse();
+                return Json(ex.EntityValidationErrors.Select(e => new EntityValidationErrorsPresenter(e)));
             }
         }
 
         [HttpDelete]
         public ActionResult Delete(int residenceID)
         {
-            _residenceService.Delete(residenceID);
-            return RedirectToAction("Index");
+            useCases.DeleteResidence.Execute(residenceID);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
+
+        // FIXME: DRY me up!
+        const string status = "422 Unprocessable Entity";
+        const int statusCode = 422;
+        const string statusDescription = "Entity validation failed. See errors for details.";
+
+        void SetUnprocessableEntityResponse()
+        {
+            Response.Status = status;
+            Response.StatusCode = statusCode;
+            Response.StatusDescription = statusDescription;
         }
     }
 }

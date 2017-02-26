@@ -1,84 +1,81 @@
 ﻿using DataAccess.FormObject;
-using InquilinxsUnidxs.Presenters;
-using InquilinxsUnidxs.Services;
-using Newtonsoft.Json;
 using System.Data.Entity.Validation;
+using System.Linq;
+using System.Net;
 using System.Web.Mvc;
-using System.Web.Routing;
+using UseCases;
+using UseCases.Presenters;
 
 namespace InquilinxsUnidxs.Controllers
 {
-    public class LandlordController : ApplicationController
+    public class LandlordController : Controller
     {
-        private LandlordService _landlordService;
+        readonly ILandlordUseCases useCases;
 
-        protected override void Initialize(RequestContext requestContext)
+        public LandlordController(ILandlordUseCases useCases)
         {
-            _landlordService = new LandlordService();
-            base.Initialize(requestContext);
+            this.useCases = useCases;
         }
 
-        public ActionResult Index(int page = 1, int pageSize = 10)
-        {
-            var presenters = _landlordService.GetLandlordPresenters(page, pageSize);
-            return this.View(presenters);
-        }
+        [HttpGet]
+        public ActionResult Index(int page = 1, int pageSize = 10) => View(useCases.GetLandlords.Execute(page, pageSize));
 
-        public ActionResult New()
-        {
-            var presenter = _landlordService.GetNewLandlordPresenter();
-            return this.View(presenter);
-        }
+        [HttpGet]
+        public ActionResult New() => View(useCases.NewLandlord.Execute());
 
-        public ActionResult Detail(int landlordID)
-        {
-            var presenter = _landlordService.GetLandlordPresenter(landlordID);
-            return this.View(presenter);
-        }
+        [HttpGet]
+        public ActionResult Detail(int landlordID) => View(useCases.ViewLandlord.Execute(landlordID));
 
-        public ActionResult Edit(int landlordID)
-        {
-            var presenter = _landlordService.GetLandlordPresenter(landlordID);
-            return this.View(presenter);
-        }
+        [HttpGet]
+        public ActionResult Edit(int landlordID) => View(useCases.EditLandlord.Execute(landlordID));
 
         [HttpPost]
-        public ContentResult Create(LandlordFormObject formObject)
+        public JsonResult Create(LandlordFormObject formObject)
         {
             try
             {
-                _landlordService.Create(formObject);
-                return this.Content(JsonConvert.SerializeObject("/Landlord/Index"));
+                useCases.CreateLandlord.Execute(formObject);
+                return Json("/Landlord/Index", JsonRequestBehavior.AllowGet);
             }
             catch (DbEntityValidationException ex)
             {
-                this.SetUnprocessableEntityResponse();
-                var presenter = new EntityValidationResultPresenter(ex);
-                return this.Content(JsonConvert.SerializeObject(presenter));
+                SetUnprocessableEntityResponse();
+                return Json(ex.EntityValidationErrors.Select(e => new EntityValidationErrorsPresenter(e)));
             }
         }
 
         [HttpPost]
-        public ContentResult Update(LandlordFormObject formObject)
+        public JsonResult Update(LandlordFormObject formObject)
         {
             try
             {
-                _landlordService.Update(formObject);
-                return Content(JsonConvert.SerializeObject("/Landlord/Index"));
+                useCases.UpdateLandlord.Execute(formObject);
+                return Json("/Landlord/Index", JsonRequestBehavior.AllowGet);
             }
             catch (DbEntityValidationException ex)
             {
-                this.SetUnprocessableEntityResponse();
-                var presenter = new EntityValidationResultPresenter(ex);
-                return this.Content(JsonConvert.SerializeObject(presenter));
+                SetUnprocessableEntityResponse();
+                return Json(ex.EntityValidationErrors.Select(e => new EntityValidationErrorsPresenter(e)));
             }
         }
 
         [HttpDelete]
         public ActionResult Delete(int landlordID)
         {
-            _landlordService.Delete(landlordID);
-            return RedirectToAction("Index");
+            useCases.DeleteLandlord.Execute(landlordID);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
+
+        // FIXME: DRY me up!
+        const string status = "422 Unprocessable Entity";
+        const int statusCode = 422;
+        const string statusDescription = "Entity validation failed. See errors for details.";
+
+        void SetUnprocessableEntityResponse()
+        {
+            Response.Status = status;
+            Response.StatusCode = statusCode;
+            Response.StatusDescription = statusDescription;
         }
     }
 }

@@ -1,6 +1,17 @@
 ﻿var ResidenceComment = function (residenceComment) {
-    this.id = residenceComment.ID;
-    this.comment = residenceComment.Comment;
+    this.id = ko.observable(residenceComment.ID);
+    this.value = ko.observable(residenceComment.Value);
+    this.dateUpdated = ko.observable(residenceComment.DateUpdated);
+    this.timeUpdated = ko.observable(residenceComment.TimeUpdated);
+    this.createdBy = ko.observable(residenceComment.CreatedBy);
+    this.lastUpdatedBy = ko.observable(residenceComment.LastUpdatedBy);
+
+    this.commentInfo = ko.computed(function () {
+        if (this.createdBy() && this.lastUpdatedBy() && this.dateUpdated() && this.timeUpdated())
+            return 'Created by ' + this.createdBy() + '. Last Updated on ' + this.dateUpdated() + ' at ' + this.timeUpdated() + ' by ' + this.lastUpdatedBy();
+        else
+            return "";
+    }, this);
 };
 
 var Residence = function (residence) {
@@ -9,8 +20,8 @@ var Residence = function (residence) {
     this.buildingId = ko.observable(residence.BuildingID);
     this.buildingAddress = residence.BuildingAddress;
 
-    this.residenceComments = ko.observableArray(_.map(residence.ResidenceComments, function (residence) {
-        return new ResidenceComment(residence);
+    this.residenceComments = ko.observableArray(_.map(residence.ResidenceComments, function (comment) {
+        return new ResidenceComment(comment);
     }));
 
     this.allBuildings = residence.AllBuildings;

@@ -1,0 +1,52 @@
+﻿@using UseCases.Presenters
+
+@model PropertyManagementCompanyPresenter
+
+@Html.ActionLink("Back to Index", "Index")
+
+<h1>Property Management Company Details</h1>
+
+<div>
+    <label>Name:</label>
+    @Model.Name
+</div>
+
+<div>
+    <label>Address:</label>
+    @Model.Address
+</div>
+
+<div>
+    <label>City:</label>
+    @Model.City
+</div>
+
+<div>
+    <label>State:</label>
+    @Model.StateName (@Model.StateAbbreviation)
+</div>
+
+<div>
+    <label>ZIP:</label>
+    @Model.ZIP
+</div>
+
+@if (Model.Comments.Count() > 0)
+{
+    <div>
+        <label><u>Comments:</u></label>
+        @foreach (var comment in Model.Comments)
+        {
+            <p>@comment.Value</p>
+        }
+    </div>
+}
+
+@if (Model.Landlords.Count() > 0)
+{
+    <label><u>Landlords:</u></label>
+    foreach (var landlord in Model.Landlords)
+    {
+        @Html.ActionLink(landlord.Name, "Detail", "Landlord", new { landlordID = landlord.ID }, null)
+    }
+}

@@ -1,4 +1,4 @@
-﻿@using InquilinxsUnidxs.Presenters
+﻿@using UseCases.Presenters
 
 @model LandlordPresenter
 
@@ -7,12 +7,50 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
-            <label for="first-name">First Name<abbr class="required" title="This field is required"> *</abbr></label>
-            <input class="form-control" id="first-name" type="text" data-bind="value: firstName" />
-        </div>
+            <label>First Name<abbr class="required" title="This field is required"> *</abbr></label>
+            <input class="form-control" type="text" data-bind="value: firstName" />
+        </div>        
+    </div>
+    <div class="col-md-6">
         <div class="form-group">
-            <label for="last-name">Last Name<abbr class="required" title="This field is required"> *</abbr></label>
-            <input class="form-control" id="last-name" type="text" data-bind="value: lastName" />
+            <label>Last Name<abbr class="required" title="This field is required"> *</abbr></label>
+            <input class="form-control" type="text" data-bind="value: lastName" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Address<abbr class="required" title="This field is required"> *</abbr></label>
+            <input class="form-control" type="text" data-bind="value: address" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>City<abbr class="required" title="This field is required"> *</abbr></label>
+            <input class="form-control" type="text" data-bind="value: city" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>State<abbr class="required" title="This field is required"> *</abbr></label>
+            <select class="form-control" data-bind="options: allStates, optionsValue: 'ID', optionsText: 'Name', value: stateId, optionsCaption: 'Choose a State...'"></select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>ZIP<abbr class="required" title="This field is required"> *</abbr></label>
+            <input class="form-control" type="text" data-bind="value: zip" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Property Management Company</label>
+            <select class="form-control" data-bind="options: allPropertyManagementCompanies, optionsValue: 'ID', optionsText: 'Name', value: propertyManagementCompanyId, optionsCaption: 'Choose a Property Management Company...'"></select>
         </div>
     </div>
 </div>

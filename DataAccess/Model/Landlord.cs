@@ -1,10 +1,10 @@
-﻿using System;
+﻿using DataAccess.Enum;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace DataAccess.Model
 {
-    public class Landlord
+    public class Landlord : IEntity<int>
     {
         public Landlord()
         {
@@ -13,20 +13,37 @@ namespace DataAccess.Model
 
         public int ID { get; set; }
 
-        [Required]
+        [MaxLength(100)]
         public string FirstName { get; set; }
 
-        [Required]
+        [MaxLength(100)]
         public string LastName { get; set; }
 
-        public string FullName
+        [MaxLength(100)]
+        public string Address { get; set; }
+
+        [MaxLength(100)]
+        public string City { get; set; }
+
+        [MinLength(5), MaxLength(5)]
+        public string ZIP { get; set; }
+
+        public States? StateID { get; set; }
+
+        public virtual State State { get; set; }
+
+        public int? PropertyManagementCompanyID { get; set; }
+
+        public virtual PropertyManagementCompany PropertyManagementCompany { get; set; }
+
+        public ICollection<Building> Buildings { get; set; }
+
+        public string Name
         {
             get
             {
-                return String.Format("{0} {1}", FirstName, LastName);
+                return $"{FirstName} {LastName}";
             }
         }
-
-        public ICollection<Building> Buildings { get; set; }
     }
 }

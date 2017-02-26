@@ -1,4 +1,4 @@
-﻿@using InquilinxsUnidxs.Presenters
+﻿@using UseCases.Presenters
 
 @model RenterPresenter
 
@@ -32,6 +32,15 @@
             <select class="form-control" id="residence" data-bind="options: residences, optionsValue: 'Item1', optionsText: 'Item2', value: residenceId, optionsCaption: 'Choose a Residence...'"></select>
         </div>
         <!-- /ko -->
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" class="form-control" data-bind="textInput: phoneNumber" />
+        </div>
     </div>
 </div>
 

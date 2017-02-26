@@ -1,0 +1,27 @@
+﻿@using UseCases.Presenters
+@using Newtonsoft.Json
+
+@model PropertyManagementCompanyPresenter
+
+@{
+    var renter = JsonConvert.SerializeObject(Model);
+}
+
+@section scripts
+{
+    <script src="~/Content/JS/PropertyManagementCompany.js"></script>
+
+    <script>
+        var container = document.getElementById("new-property-management-company-form");
+        var vm = new PropertyManagementCompany(@Html.Raw(renter));
+        ko.applyBindings(vm, container);
+    </script>
+}
+
+@Html.ActionLink("Back to Index", "Index")
+
+<h1>New Property Management Company</h1>
+
+<div id="new-property-management-company-form">
+    @Html.Partial("_Form", Model)
+</div>

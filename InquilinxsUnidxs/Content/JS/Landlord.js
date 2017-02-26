@@ -2,6 +2,14 @@
     this.id = landlord.ID;
     this.firstName = ko.observable(landlord.FirstName);
     this.lastName = ko.observable(landlord.LastName);
+    this.propertyManagementCompanyId = ko.observable(landlord.PropertyManagementCompanyID);
+    this.address = ko.observable(landlord.Address);
+    this.city = ko.observable(landlord.City);
+    this.stateAbbreviation = landlord.StateAbbreviation;
+    this.stateId = ko.observable(landlord.StateID);
+    this.zip = ko.observable(landlord.ZIP);
+    this.allStates = landlord.AllStates;
+    this.allPropertyManagementCompanies = landlord.AllPropertyManagementCompanies;
 
     this.entityValidationErrors = ko.observableArray();
 

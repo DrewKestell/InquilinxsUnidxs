@@ -1,37 +1,35 @@
 ﻿using DataAccess.FormObject;
-using InquilinxsUnidxs.Services;
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
-using System.Web.Routing;
-using Newtonsoft.Json;
+using UseCases;
 
 namespace InquilinxsUnidxs.Controllers
 {
-    public class MapController : ApplicationController
+    public class MapController : Controller
     {
-        private MapService _mapService;
+        readonly IMapUseCases useCases;
 
-        protected override void Initialize(RequestContext requestContext)
+        public MapController(IMapUseCases useCases)
         {
-            _mapService = new MapService();
-            base.Initialize(requestContext);
+            this.useCases = useCases;
         }
 
+        [HttpGet]
         public ActionResult Show(int? neighborhoodID = null, int? landlordID = null, string filter = null)
         {
-            var presenter = _mapService.GetMapPresenter(neighborhoodID, landlordID, filter);
+            var presenter = useCases.GetMap.Execute(neighborhoodID, landlordID, filter);
 
             if (Request.IsAjaxRequest())
-                return this.Content(JsonConvert.SerializeObject(presenter));
+                return Json(presenter, JsonRequestBehavior.AllowGet);
             else
-                return this.View(presenter);
+                return View(presenter);
         }
 
         [HttpPost]
         public ActionResult UpdateGeolocation(List<MapBuildingFormObject> formObjects)
         {
-            _mapService.UpdateGeolocation(formObjects);
+            useCases.UpdateGeolocation.Execute(formObjects);
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }

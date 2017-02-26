@@ -12,11 +12,11 @@ namespace DataAccess.FormObject
         public States StateID { get; set; }
         public int LandlordID { get; set; }
         public int NeighborhoodID { get; set; }
-        public List<BuildingCommentFormObject> BuildingComments { get; set; }
+        public IEnumerable<CommentFormObject> BuildingComments { get; set; }
 
         public BuildingFormObject()
         {
-            BuildingComments = new List<BuildingCommentFormObject>();
+            BuildingComments = new List<CommentFormObject>();
         }
     }
 }

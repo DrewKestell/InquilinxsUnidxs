@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C490D76E-D082-4E94-88D9-AB266B8446AC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UseCases</RootNamespace>
+    <AssemblyName>UseCases</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\InquilinxsUnidxs\Bin\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.1-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Presenters\NeighborhoodAssociationPresenter.cs" />
+    <Compile Include="Presenters\PaginationInfo.cs" />
+    <Compile Include="Presenters\PropertyManagementCompanyPresenter.cs" />
+    <Compile Include="Presenters\RenterIndexPresenter.cs" />
+    <Compile Include="UseCases\Authentication\Authenticate.cs" />
+    <Compile Include="UseCases\Authentication\AuthenticationUseCases.cs" />
+    <Compile Include="UseCases\Authentication\Interfaces\IAuthenticate.cs" />
+    <Compile Include="UseCases\Authentication\Interfaces\IAuthenticationUseCases.cs" />
+    <Compile Include="UseCases\Authentication\Interfaces\IRegister.cs" />
+    <Compile Include="UseCases\Authentication\Register.cs" />
+    <Compile Include="UseCases\Building\UpdateBuilding.cs" />
+    <Compile Include="UseCases\Building\BuildingUseCases.cs" />
+    <Compile Include="UseCases\Building\CreateBuilding.cs" />
+    <Compile Include="UseCases\Building\DeleteBuilding.cs" />
+    <Compile Include="UseCases\Building\GetBuildings.cs" />
+    <Compile Include="UseCases\Building\EditBuilding.cs" />
+    <Compile Include="UseCases\Building\Interfaces\IBuildingUseCases.cs" />
+    <Compile Include="UseCases\Building\Interfaces\ICreateBuilding.cs" />
+    <Compile Include="UseCases\Building\Interfaces\IDeleteBuilding.cs" />
+    <Compile Include="UseCases\Building\Interfaces\IEditBuilding.cs" />
+    <Compile Include="UseCases\Building\Interfaces\IGetBuildings.cs" />
+    <Compile Include="UseCases\Building\Interfaces\INewBuilding.cs" />
+    <Compile Include="UseCases\Building\Interfaces\IUpdateBuilding.cs" />
+    <Compile Include="UseCases\Building\Interfaces\IViewBuilding.cs" />
+    <Compile Include="UseCases\Building\NewBuilding.cs" />
+    <Compile Include="UseCases\Building\ViewBuilding.cs" />
+    <Compile Include="UseCases\File\FileUseCases.cs" />
+    <Compile Include="UseCases\File\GetFileUrl.cs" />
+    <Compile Include="UseCases\File\Interfaces\IFileUseCases.cs" />
+    <Compile Include="UseCases\File\Interfaces\IGetFileUrl.cs" />
+    <Compile Include="UseCases\File\Interfaces\IUploadFile.cs" />
+    <Compile Include="UseCases\File\UploadFile.cs" />
+    <Compile Include="UseCases\Landlord\CreateLandlord.cs" />
+    <Compile Include="UseCases\Landlord\DeleteLandlord.cs" />
+    <Compile Include="UseCases\Landlord\EditLandlord.cs" />
+    <Compile Include="UseCases\Landlord\GetLandlords.cs" />
+    <Compile Include="UseCases\Landlord\Interfaces\ICreateLandlord.cs" />
+    <Compile Include="UseCases\Landlord\Interfaces\IDeleteLandlord.cs" />
+    <Compile Include="UseCases\Landlord\Interfaces\IEditLandlord.cs" />
+    <Compile Include="UseCases\Landlord\Interfaces\IGetLandlord.cs" />
+    <Compile Include="UseCases\Landlord\Interfaces\ILandlordUseCases.cs" />
+    <Compile Include="UseCases\Landlord\Interfaces\INewLandlords.cs" />
+    <Compile Include="UseCases\Landlord\Interfaces\IUpdateLandlord.cs" />
+    <Compile Include="UseCases\Landlord\Interfaces\IViewLandlord.cs" />
+    <Compile Include="UseCases\Landlord\LandlordUseCases.cs" />
+    <Compile Include="UseCases\Landlord\NewLandlord.cs" />
+    <Compile Include="UseCases\Landlord\UpdateLandlord.cs" />
+    <Compile Include="UseCases\Landlord\ViewLandlord.cs" />
+    <Compile Include="UseCases\Map\GetMap.cs" />
+    <Compile Include="UseCases\Map\Interfaces\IGetMap.cs" />
+    <Compile Include="UseCases\Map\Interfaces\IMapUseCases.cs" />
+    <Compile Include="UseCases\Map\Interfaces\IUpdateGeolocation.cs" />
+    <Compile Include="UseCases\Map\MapUseCases.cs" />
+    <Compile Include="UseCases\Map\UpdateGeolocation.cs" />
+    <Compile Include="UseCases\NeighborhoodAssociation\CreateNeighborhoodAssociation.cs" />
+    <Compile Include="UseCases\NeighborhoodAssociation\DeleteNeighborhoodAssociation.cs" />
+    <Compile Include="UseCases\NeighborhoodAssociation\EditNeighborhoodAssociation.cs" />
+    <Compile Include="UseCases\NeighborhoodAssociation\GetNeighborhoodAssociations.cs" />
+    <Compile Include="UseCases\NeighborhoodAssociation\Interfaces\ICreateNeighborhoodAssociation.cs" />
+    <Compile Include="UseCases\NeighborhoodAssociation\Interfaces\IDeleteNeighborhoodAssociation.cs" />
+    <Compile Include="UseCases\NeighborhoodAssociation\Interfaces\IEditNeighborhoodAssociation.cs" />
+    <Compile Include="UseCases\NeighborhoodAssociation\Interfaces\IGetNeighborhoodAssociations.cs" />
+    <Compile Include="UseCases\NeighborhoodAssociation\Interfaces\INeighborhoodAssociationUseCases.cs" />
+    <Compile Include="UseCases\NeighborhoodAssociation\Interfaces\INewNeighborhoodAssociation.cs" />
+    <Compile Include="UseCases\NeighborhoodAssociation\Interfaces\IUpdateNeighborhoodAssociation.cs" />
+    <Compile Include="UseCases\NeighborhoodAssociation\Interfaces\IViewNeighborhoodAssociation.cs" />
+    <Compile Include="UseCases\NeighborhoodAssociation\NeighborhoodAssociationUseCases.cs" />
+    <Compile Include="UseCases\NeighborhoodAssociation\NewNeighborhoodAssociation.cs" />
+    <Compile Include="UseCases\NeighborhoodAssociation\UpdateNeighborhoodAssociation.cs" />
+    <Compile Include="UseCases\NeighborhoodAssociation\ViewNeighborhoodAssociation.cs" />
+    <Compile Include="UseCases\Neighborhood\CreateNeighborhood.cs" />
+    <Compile Include="UseCases\Neighborhood\DeleteNeighborhood.cs" />
+    <Compile Include="UseCases\Neighborhood\EditNeighborhood.cs" />
+    <Compile Include="UseCases\Neighborhood\GetNeighborhoods.cs" />
+    <Compile Include="UseCases\Neighborhood\Interfaces\IDeleteNeighborhood.cs" />
+    <Compile Include="UseCases\Neighborhood\Interfaces\ICreateNeighborhood.cs" />
+    <Compile Include="UseCases\Neighborhood\Interfaces\IEditNeighborhood.cs" />
+    <Compile Include="UseCases\Neighborhood\Interfaces\IGetNeighborhoods.cs" />
+    <Compile Include="UseCases\Neighborhood\Interfaces\INeighborhoodUseCases.cs" />
+    <Compile Include="UseCases\Neighborhood\Interfaces\INewNeighborhood.cs" />
+    <Compile Include="UseCases\Neighborhood\Interfaces\IUpdateNeighborhood.cs" />
+    <Compile Include="UseCases\Neighborhood\Interfaces\IViewNeighborhood.cs" />
+    <Compile Include="UseCases\Neighborhood\NeighborhoodUseCases.cs" />
+    <Compile Include="Presenters\BuildingPresenter.cs" />
+    <Compile Include="Presenters\CommentPresenter.cs" />
+    <Compile Include="Presenters\EntityValidationErrorsPresenter.cs" />
+    <Compile Include="Presenters\LandlordPresenter.cs" />
+    <Compile Include="Presenters\MapBuildingPresenter.cs" />
+    <Compile Include="Presenters\MapPresenter.cs" />
+    <Compile Include="Presenters\NeighborhoodPresenter.cs" />
+    <Compile Include="Presenters\PaginationPresenter.cs" />
+    <Compile Include="Presenters\RenterPresenter.cs" />
+    <Compile Include="Presenters\ResidencePresenter.cs" />
+    <Compile Include="Presenters\StatePresenter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UseCases\Neighborhood\NewNeighborhood.cs" />
+    <Compile Include="UseCases\Neighborhood\UpdateNeighborhood.cs" />
+    <Compile Include="UseCases\Neighborhood\ViewNeighborhood.cs" />
+    <Compile Include="UseCases\PropertyManagementCompany\CreatePropertyManagementCompany.cs" />
+    <Compile Include="UseCases\PropertyManagementCompany\DeletePropertyManagementCompany.cs" />
+    <Compile Include="UseCases\PropertyManagementCompany\EditPropertyManagementCompany.cs" />
+    <Compile Include="UseCases\PropertyManagementCompany\GetPropertyManagementCompanies.cs" />
+    <Compile Include="UseCases\PropertyManagementCompany\Interfaces\ICreatePropertyManagementCompany.cs" />
+    <Compile Include="UseCases\PropertyManagementCompany\Interfaces\IDeletePropertyManagementCompany.cs" />
+    <Compile Include="UseCases\PropertyManagementCompany\Interfaces\IEditPropertyManagementCompany.cs" />
+    <Compile Include="UseCases\PropertyManagementCompany\Interfaces\IGetPropertyManagementCompanies.cs" />
+    <Compile Include="UseCases\PropertyManagementCompany\Interfaces\INewPropertyManagementCompany.cs" />
+    <Compile Include="UseCases\PropertyManagementCompany\Interfaces\IPropertyManagementCompanyUseCases.cs" />
+    <Compile Include="UseCases\PropertyManagementCompany\Interfaces\IUpdatePropertyManagementCompany.cs" />
+    <Compile Include="UseCases\PropertyManagementCompany\Interfaces\IViewPropertyManagementCompany.cs" />
+    <Compile Include="UseCases\PropertyManagementCompany\UpdatePropertyManagementCompany.cs" />
+    <Compile Include="UseCases\PropertyManagementCompany\NewPropertyManagementCompany.cs" />
+    <Compile Include="UseCases\PropertyManagementCompany\PropertyManagementCompanyUseCases.cs" />
+    <Compile Include="UseCases\PropertyManagementCompany\ViewPropertyManagementCompany.cs" />
+    <Compile Include="UseCases\Renter\CreateRenter.cs" />
+    <Compile Include="UseCases\Renter\DeleteRenter.cs" />
+    <Compile Include="UseCases\Renter\EditRenter.cs" />
+    <Compile Include="UseCases\Renter\GetRenterExport.cs" />
+    <Compile Include="UseCases\Renter\GetRenters.cs" />
+    <Compile Include="UseCases\Renter\Interfaces\ICreateRenter.cs" />
+    <Compile Include="UseCases\Renter\Interfaces\IDeleteRenter.cs" />
+    <Compile Include="UseCases\Renter\Interfaces\IEditRenter.cs" />
+    <Compile Include="UseCases\Renter\Interfaces\IGetRenterExport.cs" />
+    <Compile Include="UseCases\Renter\Interfaces\IUpdateRenter.cs" />
+    <Compile Include="UseCases\Renter\Interfaces\IViewRenter.cs" />
+    <Compile Include="UseCases\Renter\NewRenter.cs" />
+    <Compile Include="UseCases\Renter\Interfaces\IGetRenters.cs" />
+    <Compile Include="UseCases\Renter\Interfaces\INewRenter.cs" />
+    <Compile Include="UseCases\Renter\Interfaces\IRenterUseCases.cs" />
+    <Compile Include="UseCases\Renter\RenterUseCases.cs" />
+    <Compile Include="UseCases\Renter\UpdateRenter.cs" />
+    <Compile Include="UseCases\Renter\ViewRenter.cs" />
+    <Compile Include="UseCases\Residence\CreateResidence.cs" />
+    <Compile Include="UseCases\Residence\DeleteResidence.cs" />
+    <Compile Include="UseCases\Residence\EditResidence.cs" />
+    <Compile Include="UseCases\Residence\GetResidences.cs" />
+    <Compile Include="UseCases\Residence\Interfaces\ICreateResidence.cs" />
+    <Compile Include="UseCases\Residence\Interfaces\IDeleteResidence.cs" />
+    <Compile Include="UseCases\Residence\Interfaces\IEditResidence.cs" />
+    <Compile Include="UseCases\Residence\Interfaces\IGetResidences.cs" />
+    <Compile Include="UseCases\Residence\Interfaces\INewResidence.cs" />
+    <Compile Include="UseCases\Residence\Interfaces\IResidenceUseCases.cs" />
+    <Compile Include="UseCases\Residence\Interfaces\IUpdateResidence.cs" />
+    <Compile Include="UseCases\Residence\Interfaces\IViewResidence.cs" />
+    <Compile Include="UseCases\Residence\NewResidence.cs" />
+    <Compile Include="UseCases\Residence\ResidenceUseCases.cs" />
+    <Compile Include="UseCases\Residence\UpdateResidence.cs" />
+    <Compile Include="UseCases\Residence\ViewResidence.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{8CCA1B85-0670-4702-BA41-C61889EE74D4}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{E70543CC-B34F-4D6A-A8A7-225183C2B063}</Project>
+      <Name>Services</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

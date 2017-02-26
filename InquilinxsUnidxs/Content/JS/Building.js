@@ -1,6 +1,17 @@
 ﻿var BuildingComment = function (buildingComment) {
-    this.id = buildingComment.ID;
-    this.comment = buildingComment.Comment;
+    this.id = ko.observable(buildingComment.ID);
+    this.value = ko.observable(buildingComment.Value);
+    this.dateUpdated = ko.observable(buildingComment.DateUpdated);
+    this.timeUpdated = ko.observable(buildingComment.TimeUpdated);
+    this.createdBy = ko.observable(buildingComment.CreatedBy);
+    this.lastUpdatedBy = ko.observable(buildingComment.LastUpdatedBy);
+    
+    this.commentInfo = ko.computed(function () {
+        if (this.createdBy() && this.lastUpdatedBy() && this.dateUpdated() && this.timeUpdated())
+            return 'Created by ' + this.createdBy() + '. Last Updated on ' + this.dateUpdated() + ' at ' + this.timeUpdated() + ' by ' + this.lastUpdatedBy();
+        else
+            return "";
+    }, this);
 };
 
 var BuildingImage = function (buildingImage) {

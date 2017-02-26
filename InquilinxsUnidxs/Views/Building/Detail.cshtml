@@ -1,4 +1,4 @@
-﻿@using InquilinxsUnidxs.Presenters
+﻿@using UseCases.Presenters
 
 @model BuildingPresenter
 
@@ -34,6 +34,14 @@
 <div>
     <label>Neighborhood:</label>
     @Html.ActionLink(Model.NeighborhoodName, "Detail", "Neighborhood", new { neighborhoodID = Model.NeighborhoodID }, null)
+</div>
+
+<div>
+    <label><u>Comments:</u></label>
+    @foreach (var comment in Model.BuildingComments)
+    {
+        <p>@comment.Value</p>
+    }
 </div>
 
 <div class="form-group">

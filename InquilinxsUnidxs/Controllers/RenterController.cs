@@ -1,84 +1,96 @@
 ﻿using DataAccess.FormObject;
-using InquilinxsUnidxs.Presenters;
-using InquilinxsUnidxs.Services;
-using Newtonsoft.Json;
 using System.Data.Entity.Validation;
+using System.Linq;
+using System.Net;
 using System.Web.Mvc;
-using System.Web.Routing;
+using UseCases;
+using UseCases.Presenters;
 
 namespace InquilinxsUnidxs.Controllers
 {
-    public class RenterController : ApplicationController
+    public class RenterController : Controller
     {
-        private RenterService _renterService;
+        readonly IRenterUseCases useCases;
 
-        protected override void Initialize(RequestContext requestContext)
-        {            
-            _renterService = new RenterService();
-            base.Initialize(requestContext);
+        public RenterController(IRenterUseCases useCases)
+        {
+            this.useCases = useCases;
         }
 
-        public ActionResult Index(int page = 1, int pageSize = 10)
-        {
-            var presenters = _renterService.GetRenterPresenters(page, pageSize);
-            return this.View(presenters);
-        }
+        [HttpGet]
+        public ActionResult Index(int page = 1, int pageSize = 10, string filter = "") => 
+            View(useCases.GetRenters.Execute(page, pageSize, filter));
 
-        public ActionResult New()
-        {
-            var presenter = _renterService.GetNewRenterPresenter();
-            return this.View(presenter);
-        }        
+        [HttpGet]
+        public ActionResult New() => View(useCases.NewRenter.Execute());
 
-        public ActionResult Detail(int renterID)
-        {
-            var presenter = _renterService.GetRenterPresenter(renterID);
-            return this.View(presenter);
-        }
+        [HttpGet]
+        public ActionResult Detail(int renterID) => View(useCases.ViewRenter.Execute(renterID));
 
-        public ActionResult Edit(int renterID)
-        {
-            var presenter = _renterService.GetRenterPresenter(renterID);
-            return this.View(presenter);
-        }
+        [HttpGet]
+        public ActionResult Edit(int renterID) => View(useCases.EditRenter.Execute(renterID));
 
-        [HttpPost]
-        public ContentResult Create(RenterFormObject formObject)
+        [HttpGet]
+        public ActionResult GetCsvExport()
         {
-            try
-            {
-                _renterService.Create(formObject);
-                return this.Content(JsonConvert.SerializeObject("/Renter/Index"));
-            }
-            catch (DbEntityValidationException ex)
-            {
-                this.SetUnprocessableEntityResponse();
-                var presenter = new EntityValidationResultPresenter(ex);
-                return this.Content(JsonConvert.SerializeObject(presenter));
-            }
+            var csv = useCases.GetRenterExport.Execute();
+
+            Response.Clear();
+            Response.AddHeader("Content-Disposition", "attachment; filename=template.csv");
+            Response.ContentType = "text/csv";
+            Response.Write(csv);
+            Response.End();
+
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
         [HttpPost]
-        public ContentResult Update(RenterFormObject formObject)
+        public JsonResult Create(RenterFormObject formObject)
         {
             try
             {
-                _renterService.Update(formObject);
-                return Content(JsonConvert.SerializeObject("/Renter/Index"));
+                useCases.CreateRenter.Execute(formObject);
+                return Json("/Renter/Index", JsonRequestBehavior.AllowGet);
             }
             catch (DbEntityValidationException ex)
             {
-                this.SetUnprocessableEntityResponse();
-                var presenter = new EntityValidationResultPresenter(ex);
-                return this.Content(JsonConvert.SerializeObject(presenter));
-            }            
+                SetUnprocessableEntityResponse();
+                return Json(ex.EntityValidationErrors.Select(e => new EntityValidationErrorsPresenter(e)));
+            }
         }
-        
+
+        [HttpPost]
+        public JsonResult Update(RenterFormObject formObject)
+        {
+            try
+            {
+                useCases.UpdateRenter.Execute(formObject);
+                return Json("/Renter/Index", JsonRequestBehavior.AllowGet);
+            }
+            catch (DbEntityValidationException ex)
+            {
+                SetUnprocessableEntityResponse();
+                return Json(ex.EntityValidationErrors.Select(e => new EntityValidationErrorsPresenter(e)));
+            }
+        }
+
         [HttpDelete]
         public ActionResult Delete(int renterID)
         {
-            _renterService.Delete(renterID);
-            return RedirectToAction("Index");
+            useCases.DeleteRenter.Execute(renterID);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
+
+        // FIXME: DRY me up!
+        const string status = "422 Unprocessable Entity";
+        const int statusCode = 422;
+        const string statusDescription = "Entity validation failed. See errors for details.";
+
+        void SetUnprocessableEntityResponse()
+        {
+            Response.Status = status;
+            Response.StatusCode = statusCode;
+            Response.StatusDescription = statusDescription;
         }
     }
 }

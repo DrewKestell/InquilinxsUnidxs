@@ -1,35 +1,36 @@
-﻿using InquilinxsUnidxs.Exceptions;
-using InquilinxsUnidxs.Services;
+﻿using Services.Exceptions;
 using System.Web.Mvc;
-using System.Web.Routing;
+using System.Web.Security;
+using UseCases;
 
 namespace InquilinxsUnidxs.Controllers
 {
-    public class AuthenticationController : ApplicationController
+    [Authorize]
+    public class AuthenticationController : Controller
     {
-        private AuthenticationService _authenticationService;
-        private const string _registrationSuccessful = "Registration was successful. You may now log in.";
+        const string registrationSuccessful = "Registration was successful. You may now log in.";
 
-        protected override void Initialize(RequestContext requestContext)
+        readonly IAuthenticationUseCases useCases;
+
+        public AuthenticationController(IAuthenticationUseCases useCases)
         {
-            base.Initialize(requestContext);
-            _authenticationService = new AuthenticationService();
+            this.useCases = useCases; 
         }
 
-        [AllowAnonymous]
+        [AllowAnonymous, HttpGet]
         public ActionResult LogIn()
         {
             ViewBag.Error = TempData["Error"];
             ViewBag.Success = TempData["Success"];
-            return this.View();
+            return View();
         }
 
-        [AllowAnonymous]
+        [AllowAnonymous, HttpPost]
         public ActionResult Authenticate(string username, string password)
         {
             try
             {
-                _authenticationService.Authenticate(username, password);
+                useCases.Authenticate.Execute(username, password);
             }
             catch (InquilinxsException e)
             {
@@ -39,14 +40,15 @@ namespace InquilinxsUnidxs.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpPost]
         public ActionResult LogOut()
         {
-            _authenticationService.LogOut();
+            FormsAuthentication.SignOut();
             return RedirectToAction("LogIn");
         }
 
-        [AllowAnonymous]
-        public ActionResult Register()
+        [AllowAnonymous, HttpGet]
+        public ActionResult NewUser()
         {
             ViewBag.Error = TempData["Error"];
             return View();
@@ -57,14 +59,14 @@ namespace InquilinxsUnidxs.Controllers
         {
             try
             {
-                _authenticationService.Register(username, password, confirmPassword, email);
+                useCases.Register.Execute(username, password, confirmPassword, email);
             }
             catch(InquilinxsException e)
             {
                 TempData["Error"] = e.Message;
-                return RedirectToAction("Register");
+                return RedirectToAction("NewUser");
             }
-            TempData["Success"] = _registrationSuccessful;
+            TempData["Success"] = registrationSuccessful;
             return RedirectToAction("LogIn");
         }
     }

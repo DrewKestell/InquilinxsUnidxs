@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DataAccess.Model
 {
-    public class Neighborhood
+    public class Neighborhood : IEntity<int>
     {
         public Neighborhood()
         {
@@ -12,7 +12,7 @@ namespace DataAccess.Model
 
         public int ID { get; set; }
 
-        [Required]
+        [Required, MaxLength(100)]
         public string Name { get; set; }
 
         public virtual ICollection<Building> Buildings { get; set; }

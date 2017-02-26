@@ -1,0 +1,46 @@
+﻿@using UseCases.Presenters
+
+@model NeighborhoodAssociationPresenter
+
+@Html.Partial("_KOErrors")
+
+<div class="neighborhood-association-form">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Name</label>
+                <input class="form-control" type="text" data-bind="textInput: name" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Contact First Name</label>
+                <input class="form-control" type="text" data-bind="textInput: contactFirstName" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Contact Last Name</label>
+                <input class="form-control" type="text" data-bind="textInput: contactLastName" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Contact Title</label>
+                <input class="form-control" type="text" data-bind="textInput: contactTitle" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Contact Phone Number</label>
+                <input class="form-control" type="text" data-bind="textInput: contactPhoneNumber" />
+            </div>
+        </div>
+    </div>
+
+    <a href="#" class="btn btn-primary" data-bind="click: save">Save</a>
+</div>

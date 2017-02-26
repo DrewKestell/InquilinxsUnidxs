@@ -10,10 +10,10 @@ namespace DataAccess.Model
         [Required, MaxLength(40), Index(IsUnique = true)]
         public string Username { get; set; }
 
-        [Required]
+        [Required, MaxLength(100)]
         public string Password { get; set; }
 
-        [Required]
+        [Required, MaxLength(100)]
         public string Email { get; set; }
     }
 }

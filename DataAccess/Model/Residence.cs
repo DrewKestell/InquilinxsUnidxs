@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using DataAccess.CustomConventions;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace DataAccess.Model
 {
-    public class Residence
+    public class Residence : IEntity<int>
     {
         public Residence()
         {
@@ -13,11 +14,12 @@ namespace DataAccess.Model
 
         public int ID { get; set; }
 
-        [Required]
+        [Required, MaxLength(100)]
         public string Name { get; set; }
 
         public int BuildingID { get; set; }
 
+        [CascadeDelete]
         public virtual Building Building { get; set; }
 
         public virtual ICollection<Renter> Renters { get; set; }

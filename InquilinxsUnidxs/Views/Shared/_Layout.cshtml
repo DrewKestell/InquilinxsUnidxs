@@ -1,9 +1,5 @@
 ﻿@using InquilinxsUnidxs.Controllers
 
-@{ 
-    var applicationController = (ApplicationController)ViewContext.Controller;
-}
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,17 +21,28 @@
                 @Html.ActionLink("Inquilinxs Unidxs Renter Database", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-            @if (applicationController.CurrentUser != null)
+            @if (Request.IsAuthenticated)
             {
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Landlords", "Index", "Landlord")</li>
-                    <li>@Html.ActionLink("Neighborhoods", "Index", "Neighborhood")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Property Management<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Property Management Companies", "Index", "PropertyManagementCompany")</li>
+                            <li>@Html.ActionLink("Landlords", "Index", "Landlord")</li>                        
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Neighborhood<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Neighborhoods", "Index", "Neighborhood")</li>
+                            <li>@Html.ActionLink("Neighborhood Associations", "Index", "NeighborhoodAssociation")</li>
+                        </ul>
+                    </li>
                     <li>@Html.ActionLink("Buildings", "Index", "Building")</li>
                     <li>@Html.ActionLink("Residences", "Index", "Residence")</li>
                     <li>@Html.ActionLink("Renters", "Index", "Renter")</li>
                     <li>@Html.ActionLink("Map", "Show", "Map")</li>
                 </ul>
-                <span class="pull-right header-user-info">Welcome, @applicationController.CurrentUser.Username!</span>   
             }
             </div>
         </div>
@@ -48,10 +55,10 @@
             <hr />
             <footer>
                 <div class="footer-nav">
-                    @if (applicationController.CurrentUser == null)
+                    @if (!Request.IsAuthenticated)
                     {
                         <span class="footer-link">@Html.ActionLink("Log In", "LogIn", "Authentication")</span>
-                        <span class="footer-link">@Html.ActionLink("Register", "Register", "Authentication")</span>
+                        <span class="footer-link">@Html.ActionLink("Register", "NewUser", "Authentication")</span>
                     }
                     else
                     {

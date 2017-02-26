@@ -1,25 +1,12 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using DataAccess.CustomConventions;
 
 namespace DataAccess.Model
 {
-    public class ResidenceComment
+    public class ResidenceComment : Comment
     {
-        public int ID { get; set; }
-
-        public DateTime DateCreated { get; set; }
-
-        public DateTime LastUpdated { get; set; }
-
-        [Required]
-        public string Comment { get; set; }
-
         public int ResidenceID { get; set; }
 
-        public int UserID { get; set; }
-
+        [CascadeDelete]
         public virtual Residence Residence { get; set; }
-
-        public virtual User User { get; set; }
     }
 }

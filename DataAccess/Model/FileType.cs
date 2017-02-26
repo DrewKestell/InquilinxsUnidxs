@@ -9,7 +9,7 @@ namespace DataAccess.Model
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public FileTypes ID { get; set; }
 
-        [Required]
+        [Required, MaxLength(100)]
         public string Name { get; set; }
     }
 }

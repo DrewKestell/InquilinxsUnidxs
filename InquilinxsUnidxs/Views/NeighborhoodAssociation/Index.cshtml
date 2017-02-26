@@ -1,0 +1,65 @@
+﻿@using UseCases.Presenters
+@using Newtonsoft.Json
+@using System.Web.Mvc.Html
+@using System.Collections.Generic
+
+@model IEnumerable<NeighborhoodAssociationPresenter>
+
+@{
+    var index = JsonConvert.SerializeObject(Model);
+}
+
+@section scripts
+{
+    <script src="~/Content/JS/NeighborhoodAssociation.js"></script>
+
+    <script>
+        var container = document.getElementById("neighborhood-association-index");
+        var vm = new NeighborhoodAssociationIndex(@Html.Raw(index));
+        ko.applyBindings(vm, container);
+    </script>
+}
+
+<h1>Neighborhood Association Index</h1>
+
+<div class="form-group">
+    @Html.ActionLink("New", "New", null, new { @class = "btn btn-primary" })
+</div>
+
+@if (Model.Count() > 0)
+{
+    <div id="neighborhood-association-index">
+        <table class="table table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Contact First Name</th>
+                    <th>Contact Last Name</th>
+                    <th>Contact Title</th>
+                    <th>Contact Phone Number</th>
+                    <th>Details</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ko foreach: neighborhoodAssociations -->
+                <tr>
+                    <td data-bind="text: name"></td>
+                    <td data-bind="text: contactFirstName"></td>
+                    <td data-bind="text: contactLastName"></td>
+                    <td data-bind="text: contactTitle"></td>
+                    <td data-bind="text: contactPhoneNumber"></td>
+                    <td><a data-bind="attr: { href: detailLink }">Detail</a></td>
+                    <td><a data-bind="attr: { href: editLink }">Edit</a></td>
+                    <td><a href="#" data-bind="click: $root.deleteNeighborhoodAssociation.bind($root, $data)">Delete</a></td>
+                </tr>
+                <!-- /ko -->
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="no-data">No Neighborhood Associations Found</div>
+}

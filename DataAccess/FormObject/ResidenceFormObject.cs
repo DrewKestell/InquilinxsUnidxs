@@ -7,12 +7,11 @@ namespace DataAccess.FormObject
         public int ID { get; set; }
         public string Name { get; set; }
         public int BuildingID { get; set; }
-
-        public List<ResidenceCommentFormObject> ResidenceComments { get; set; }
+        public IEnumerable<CommentFormObject> ResidenceComments { get; set; }
 
         public ResidenceFormObject()
         {
-            ResidenceComments = new List<ResidenceCommentFormObject>();
+            ResidenceComments = new List<CommentFormObject>();
         }
     }
 }

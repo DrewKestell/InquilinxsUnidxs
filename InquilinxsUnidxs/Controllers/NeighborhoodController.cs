@@ -1,84 +1,81 @@
 ﻿using DataAccess.FormObject;
-using InquilinxsUnidxs.Presenters;
-using InquilinxsUnidxs.Services;
-using Newtonsoft.Json;
 using System.Data.Entity.Validation;
+using System.Linq;
+using System.Net;
 using System.Web.Mvc;
-using System.Web.Routing;
+using UseCases;
+using UseCases.Presenters;
 
 namespace InquilinxsUnidxs.Controllers
 {
-    public class NeighborhoodController : ApplicationController
+    public class NeighborhoodController : Controller
     {
-        private NeighborhoodService _neighborhoodService;
+        readonly INeighborhoodUseCases useCases;
 
-        protected override void Initialize(RequestContext requestContext)
+        public NeighborhoodController(INeighborhoodUseCases useCases)
         {
-            _neighborhoodService = new NeighborhoodService();
-            base.Initialize(requestContext);
+            this.useCases = useCases;
         }
 
-        public ActionResult Index(int page = 1, int pageSize = 10)
-        {
-            var presenters = _neighborhoodService.GetNeighborhoodPresenters(page, pageSize);
-            return this.View(presenters);
-        }
+        [HttpGet]
+        public ActionResult Index(int page = 1, int pageSize = 10) => View(useCases.GetNeighborhoods.Execute(page, pageSize));
 
-        public ActionResult New()
-        {
-            var presenter = _neighborhoodService.GetNewNeighborhoodPresenter();
-            return this.View(presenter);
-        }
+        [HttpGet]
+        public ActionResult New() => View(useCases.NewNeighborhood.Execute());
 
-        public ActionResult Detail(int neighborhoodID)
-        {
-            var presenter = _neighborhoodService.GetNeighborhoodPresenter(neighborhoodID);
-            return this.View(presenter);
-        }
+        [HttpGet]
+        public ActionResult Detail(int neighborhoodID) => View(useCases.ViewNeighborhood.Execute(neighborhoodID));
 
-        public ActionResult Edit(int neighborhoodID)
-        {
-            var presenter = _neighborhoodService.GetNeighborhoodPresenter(neighborhoodID);
-            return this.View(presenter);
-        }
+        [HttpGet]
+        public ActionResult Edit(int neighborhoodID) => View(useCases.EditNeighborhood.Execute(neighborhoodID));
 
         [HttpPost]
-        public ContentResult Create(NeighborhoodFormObject formObject)
+        public JsonResult Create(NeighborhoodFormObject formObject)
         {
             try
             {
-                _neighborhoodService.Create(formObject);
-                return this.Content(JsonConvert.SerializeObject("/Neighborhood/Index"));
+                useCases.CreateNeighborhood.Execute(formObject);
+                return Json("/Neighborhood/Index", JsonRequestBehavior.AllowGet);
             }
             catch (DbEntityValidationException ex)
             {
-                this.SetUnprocessableEntityResponse();
-                var presenter = new EntityValidationResultPresenter(ex);
-                return this.Content(JsonConvert.SerializeObject(presenter));
+                SetUnprocessableEntityResponse();
+                return Json(ex.EntityValidationErrors.Select(e => new EntityValidationErrorsPresenter(e)));
             }
         }
 
         [HttpPost]
-        public ContentResult Update(NeighborhoodFormObject formObject)
+        public JsonResult Update(NeighborhoodFormObject formObject)
         {
             try
             {
-                _neighborhoodService.Update(formObject);
-                return Content(JsonConvert.SerializeObject("/Neighborhood/Index"));
+                useCases.UpdateNeighborhood.Execute(formObject);
+                return Json("/Neighborhood/Index", JsonRequestBehavior.AllowGet);
             }
             catch (DbEntityValidationException ex)
             {
-                this.SetUnprocessableEntityResponse();
-                var presenter = new EntityValidationResultPresenter(ex);
-                return this.Content(JsonConvert.SerializeObject(presenter));
+                SetUnprocessableEntityResponse();
+                return Json(ex.EntityValidationErrors.Select(e => new EntityValidationErrorsPresenter(e)));
             }
         }
 
         [HttpDelete]
         public ActionResult Delete(int neighborhoodID)
         {
-            _neighborhoodService.Delete(neighborhoodID);
-            return RedirectToAction("Index");
+            useCases.DeleteNeighborhood.Execute(neighborhoodID);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
+
+        // FIXME: DRY me up!
+        const string status = "422 Unprocessable Entity";
+        const int statusCode = 422;
+        const string statusDescription = "Entity validation failed. See errors for details.";
+
+        void SetUnprocessableEntityResponse()
+        {
+            Response.Status = status;
+            Response.StatusCode = statusCode;
+            Response.StatusDescription = statusDescription;
         }
     }
 }

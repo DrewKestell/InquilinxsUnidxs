@@ -1,4 +1,4 @@
-﻿@using InquilinxsUnidxs.Presenters
+﻿@using UseCases.Presenters
 
 @model LandlordPresenter
 
@@ -16,10 +16,39 @@
     @Model.LastName
 </div>
 
-<div class="form-group">
-    <label><u>Buildings:</u></label>
-    @foreach (var building in Model.Buildings)
-    {
-        <div>@Html.ActionLink(building.Item2, "Detail", "Building", new { buildingID = building.Item1 }, null )</div>
-    }
+<div>
+    <label>Address:</label>
+    @Model.Address
 </div>
+
+<div>
+    <label>City:</label>
+    @Model.City
+</div>
+
+<div>
+    <label>State:</label>
+    @Model.StateName (@Model.StateAbbreviation)
+</div>
+
+<div>
+    <label>ZIP:</label>
+    @Model.ZIP
+</div>
+
+@if (Model.PropertyManagementCompanyID.HasValue)
+{
+    <label>Property Management Company:</label>
+    @Html.ActionLink(Model.PropertyManagementCompanyName, "Detail", "PropertyManagementCompany", new { propertyManagementCompanyID = Model.PropertyManagementCompanyID }, null)
+}
+
+@if (Model.Buildings.Count() > 0)
+{
+    <div class="form-group">
+        <label><u>Buildings:</u></label>
+        @foreach (var building in Model.Buildings)
+        {
+            <div>@Html.ActionLink(building.Item2, "Detail", "Building", new { buildingID = building.Item1 }, null)</div>
+        }
+    </div>
+}

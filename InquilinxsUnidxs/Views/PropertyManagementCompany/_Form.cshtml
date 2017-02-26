@@ -1,0 +1,60 @@
+﻿@using UseCases.Presenters
+
+@model PropertyManagementCompanyPresenter
+
+@Html.Partial("_KOErrors")
+
+<div class="neighborhood-association-form">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Name</label>
+                <input class="form-control" type="text" data-bind="textInput: name" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Address</label>
+                <input class="form-control" type="text" data-bind="textInput: address" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>City</label>
+                <input class="form-control" type="text" data-bind="textInput: city" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>State</label>
+                <select class="form-control" id="state" data-bind="options: allStates, optionsValue: 'ID', optionsText: 'Name', value: stateId, optionsCaption: 'Choose a State...'"></select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="zip">ZIP<abbr class="required" title="This field is required"> *</abbr></label>
+                <input class="form-control" id="zip" type="text" data-bind="value: zip" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <label>Comments</label><a class="new-comment" data-bind="click: addComment">Add Comment</a>
+            <!-- ko foreach: comments -->
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" data-bind="textInput: value" />
+                    <div class="input-group-addon" data-bind="click: $parent.removeComment"><span class="glyphicon glyphicon-remove"></span></div>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+
+    <a href="#" class="btn btn-primary" data-bind="click: save">Save</a>
+</div>

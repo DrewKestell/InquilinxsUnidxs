@@ -1,4 +1,5 @@
-﻿using DataAccess.Enum;
+﻿using DataAccess.CustomConventions;
+using DataAccess.Enum;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System;
@@ -17,13 +18,14 @@ namespace DataAccess.Model
 
         public FileTypes FileTypeID { get; set; }
 
-        public virtual FileType FileType { get; set; }
-
         public int? BuildingID { get; set; }
+
+        public int? ResidenceID { get; set; }
 
         public virtual Building Building { get; set; }
 
-        public int? ResidenceID { get; set; }
+        [CascadeDelete]
+        public virtual FileType FileType { get; set; }
 
         public virtual Residence Residence { get; set; }
 

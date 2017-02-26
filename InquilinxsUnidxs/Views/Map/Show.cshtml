@@ -1,4 +1,4 @@
-﻿@using InquilinxsUnidxs.Presenters
+﻿@using UseCases.Presenters
 @using Newtonsoft.Json
 
 @model MapPresenter
@@ -34,10 +34,10 @@
         </div>
         <div class="row">
             <div class="col-md-3">
-                <select class="form-control" data-bind="options: allNeighborhoods, optionsValue: 'Item1', optionsText: 'Item2', value: neighborhoodId, optionsCaption: 'Filter by Neighborhood...'"></select>
+                <select class="form-control" data-bind="options: allNeighborhoods, optionsValue: 'ID', optionsText: 'Name', value: neighborhoodId, optionsCaption: 'Filter by Neighborhood...'"></select>
             </div>
             <div class="col-md-3">
-                <select class="form-control" data-bind="options: allLandlords, optionsValue: 'Item1', optionsText: 'Item2', value: landlordId, optionsCaption: 'Filter by Landlord...'"></select>
+                <select class="form-control" data-bind="options: allLandlords, optionsValue: 'ID', optionsText: 'Name', value: landlordId, optionsCaption: 'Filter by Landlord...'"></select>
             </div>
             <div class="col-md-3">
                 <input type="text" class="form-control" data-bind="value: filter" placeholder="Filter by Address..." />

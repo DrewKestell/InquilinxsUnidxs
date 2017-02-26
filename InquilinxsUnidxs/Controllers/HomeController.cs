@@ -2,12 +2,13 @@
 
 namespace InquilinxsUnidxs.Controllers
 {
-    public class HomeController : ApplicationController
+    [Authorize]
+    public class HomeController : Controller
     {
-        [AllowAnonymous]
+        [AllowAnonymous, HttpGet]
         public ActionResult Index()
         {
-            return this.View();
+            return View();
         }
     }
 }

@@ -1,22 +1,29 @@
-﻿using InquilinxsUnidxs.Services;
+﻿using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
+using UseCases;
 
 namespace InquilinxsUnidxs.Controllers
 {
-    public class FileController : ApplicationController
+    public class FileController : Controller
     {
-        private FileService _fileService;
+        readonly IFileUseCases useCases;
 
-        protected override void Initialize(RequestContext requestContext)
+        public FileController(IFileUseCases useCases)
         {
-            _fileService = new FileService();
-            base.Initialize(requestContext);
+            this.useCases = useCases;
         }
 
+        [HttpGet]
         public ContentResult GetFileURL(int fileID)
         {
-            return this.Content(_fileService.GetFileURL(fileID));
-        }        
+            return Content(useCases.GetFileUrl.Execute(fileID));
+        }
+
+        [HttpPost]
+        public ActionResult UploadFile(HttpPostedFileBase file)
+        {
+            useCases.UploadFile.Execute(file);
+            return null; // FIXME: return null?
+        }
     }
 }

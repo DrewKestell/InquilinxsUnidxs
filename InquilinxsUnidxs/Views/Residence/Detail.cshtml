@@ -1,4 +1,4 @@
-﻿@using InquilinxsUnidxs.Presenters
+﻿@using UseCases.Presenters
 
 @model ResidencePresenter
 
@@ -14,6 +14,14 @@
 <div>
     <label>Name:</label>
     @Model.Name
+</div>
+
+<div>
+    <label><u>Comments:</u></label>
+    @foreach (var comment in Model.ResidenceComments)
+    {
+        <p>@comment.Value</p>
+    }
 </div>
 
 <div class="form-group">

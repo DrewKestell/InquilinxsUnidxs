@@ -1,0 +1,65 @@
+﻿@using UseCases.Presenters
+@using Newtonsoft.Json
+@using System.Web.Mvc.Html
+@using System.Collections.Generic
+
+@model IEnumerable<PropertyManagementCompanyPresenter>
+
+@{
+    var index = JsonConvert.SerializeObject(Model);
+}
+
+@section scripts
+{
+    <script src="~/Content/JS/PropertyManagementCompany.js"></script>
+
+    <script>
+        var container = document.getElementById("property-management-company-index");
+        var vm = new PropertyManagementCompanyIndex(@Html.Raw(index));
+        ko.applyBindings(vm, container);
+    </script>
+}
+
+<h1>Property Management Company Index</h1>
+
+<div class="form-group">
+    @Html.ActionLink("New", "New", null, new { @class = "btn btn-primary" })
+</div>
+
+@if (Model.Count() > 0)
+{
+    <div id="property-management-company-index">
+        <table class="table table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>States</th>
+                    <th>ZIP</th>
+                    <th>Details</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ko foreach: companies -->
+                <tr>
+                    <td data-bind="text: name"></td>
+                    <td data-bind="text: address"></td>
+                    <td data-bind="text: city"></td>
+                    <td data-bind="text: stateAbbreviation"></td>
+                    <td data-bind="text: zip"></td>
+                    <td><a data-bind="attr: { href: detailLink }">Detail</a></td>
+                    <td><a data-bind="attr: { href: editLink }">Edit</a></td>
+                    <td><a href="#" data-bind="click: $root.deletePropertyManagementCompany.bind($root, $data)">Delete</a></td>
+                </tr>
+                <!-- /ko -->
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="no-data">No Property Management Companies Found</div>
+}

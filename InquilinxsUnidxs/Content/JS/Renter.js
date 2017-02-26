@@ -1,7 +1,8 @@
 ﻿var Renter = function (renter) {
-    this.id = renter.ID;
+    this.id = renter.ID;    
     this.firstName = ko.observable(renter.FirstName);
     this.lastName = ko.observable(renter.LastName);
+    this.phoneNumber = ko.observable(renter.PhoneNumber);
     this.address = renter.Address;
     this.residence = renter.ResidenceName;
     this.buildingId = ko.observable(renter.BuildingID);

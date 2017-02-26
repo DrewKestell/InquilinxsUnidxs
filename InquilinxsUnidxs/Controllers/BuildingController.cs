@@ -1,92 +1,81 @@
 ﻿using DataAccess.FormObject;
-using InquilinxsUnidxs.Presenters;
-using InquilinxsUnidxs.Services;
-using Newtonsoft.Json;
 using System.Data.Entity.Validation;
-using System.Web;
+using System.Linq;
+using System.Net;
 using System.Web.Mvc;
-using System.Web.Routing;
+using UseCases;
+using UseCases.Presenters;
 
 namespace InquilinxsUnidxs.Controllers
 {
-    public class BuildingController : ApplicationController
+    public class BuildingController : Controller
     {
-        private BuildingService _buildingService;
+        readonly IBuildingUseCases useCases;
 
-        protected override void Initialize(RequestContext requestContext)
+        public BuildingController(IBuildingUseCases useCases)
         {
-            _buildingService = new BuildingService();
-            base.Initialize(requestContext);
+            this.useCases = useCases;
         }
 
-        public ActionResult Index(int page = 1, int pageSize = 10)
-        {
-            var presenters = _buildingService.GetBuildingPresenters(page, pageSize);
-            return this.View(presenters);
-        }
+        [HttpGet]
+        public ActionResult Index(int page = 1, int pageSize = 10) => View(useCases.GetBuildings.Execute(page, pageSize));
 
-        public ActionResult New()
-        {
-            var presenter = _buildingService.GetNewBuildingPresenter();
-            return this.View(presenter);
-        }
+        [HttpGet]
+        public ActionResult New() => View(useCases.NewBuilding.Execute());
 
-        public ActionResult Detail(int buildingID)
-        {
-            var presenter = _buildingService.GetBuildingPresenter(buildingID);
-            return this.View(presenter);
-        }
+        [HttpGet]
+        public ActionResult Detail(int buildingID) => View(useCases.ViewBuilding.Execute(buildingID));
 
-        public ActionResult Edit(int buildingID)
-        {
-            var presenter = _buildingService.GetBuildingPresenter(buildingID);
-            return this.View(presenter);
-        }
+        [HttpGet]
+        public ActionResult Edit(int buildingID) => View(useCases.EditBuilding.Execute(buildingID));
 
         [HttpPost]
-        public ContentResult Create(BuildingFormObject formObject)
+        public JsonResult Create(BuildingFormObject formObject)
         {
             try
             {
-                _buildingService.Create(formObject, this.CurrentUser);
-                return this.Content(JsonConvert.SerializeObject("/Building/Index"));
+                useCases.CreateBuilding.Execute(formObject, 1); // FIXME: hardcoded UserID
+                return Json("/Building/Index");
             }
             catch (DbEntityValidationException ex)
             {
-                this.SetUnprocessableEntityResponse();
-                var presenter = new EntityValidationResultPresenter(ex);
-                return this.Content(JsonConvert.SerializeObject(presenter));
+                SetUnprocessableEntityResponse();
+                return Json(ex.EntityValidationErrors.Select(e => new EntityValidationErrorsPresenter(e)));
             }
         }
 
         [HttpPost]
-        public ContentResult Update(BuildingFormObject formObject)
+        public JsonResult Update(BuildingFormObject formObject)
         {
             try
             {
-                _buildingService.Update(formObject, this.CurrentUser);
-                return Content(JsonConvert.SerializeObject("/Building/Index"));
+                useCases.UpdateBuilding.Execute(formObject, 1); // FIXME: hardcoded UserID
+                return Json("/Building/Index");
             }
             catch (DbEntityValidationException ex)
             {
-                this.SetUnprocessableEntityResponse();
-                var presenter = new EntityValidationResultPresenter(ex);
-                return this.Content(JsonConvert.SerializeObject(presenter));
+                SetUnprocessableEntityResponse();
+                return Json(ex.EntityValidationErrors.Select(e => new EntityValidationErrorsPresenter(e)));
             }
-        }
-
-        [HttpPost]
-        public ActionResult UploadFile(HttpPostedFileBase file)
-        {
-            _buildingService.UploadFile(file);
-            return null;
         }
 
         [HttpDelete]
         public ActionResult Delete(int buildingID)
         {
-            _buildingService.Delete(buildingID);
-            return RedirectToAction("Index");
+            useCases.DeleteBuilding.Execute(buildingID);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
+
+        // FIXME: DRY me up!
+        const string status = "422 Unprocessable Entity";
+        const int statusCode = 422;
+        const string statusDescription = "Entity validation failed. See errors for details.";
+
+        void SetUnprocessableEntityResponse()
+        {
+            Response.Status = status;
+            Response.StatusCode = statusCode;
+            Response.StatusDescription = statusDescription;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@using InquilinxsUnidxs.Presenters
+﻿@using UseCases.Presenters
 
 @model ResidencePresenter
 
@@ -9,7 +9,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="building">Building<abbr class="required" title="This field is required"> *</abbr></label>
-                <select class="form-control" id="building" data-bind="options: allBuildings, optionsValue: 'Item1', optionsText: 'Item2', value: buildingId, optionsCaption: 'Choose a Building...'"></select>
+                <select class="form-control" id="building" data-bind="options: allBuildings, optionsValue: 'ID', optionsText: 'Name', value: buildingId, optionsCaption: 'Choose a Building...'"></select>
             </div>
         </div>
         <div class="col-md-6">
@@ -26,9 +26,10 @@
             <!-- ko foreach: residenceComments -->
             <div class="form-group">
                 <div class="input-group">
-                    <input type="text" class="form-control" data-bind="value: comment" />
+                    <input type="text" class="form-control" data-bind="value: value" />
                     <div class="input-group-addon" data-bind="click: $parent.removeResidenceComment"><span class="glyphicon glyphicon-remove"></span></div>
                 </div>
+                <small><em data-bind="text: commentInfo"></em></small>
             </div>
             <!-- /ko -->
         </div>

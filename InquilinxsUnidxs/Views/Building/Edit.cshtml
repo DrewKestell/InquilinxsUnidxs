@@ -1,4 +1,4 @@
-﻿@using InquilinxsUnidxs.Presenters
+﻿@using UseCases.Presenters
 @using Newtonsoft.Json
 
 @model BuildingPresenter
@@ -12,7 +12,7 @@
     <script src="~/Content/JS/Building.js"></script>
 
     <script>
-        var container = document.getElementById("new-building-form");
+        var container = document.getElementById("edit-building-form");
         var vm = new Building(@Html.Raw(renter));
         ko.applyBindings(vm, container);
     </script>

@@ -1,0 +1,27 @@
+﻿@using UseCases.Presenters
+@using Newtonsoft.Json
+
+@model NeighborhoodAssociationPresenter
+
+@{
+    var renter = JsonConvert.SerializeObject(Model);
+}
+
+@section scripts
+{
+    <script src="~/Content/JS/NeighborhoodAssociation.js"></script>
+
+    <script>
+        var container = document.getElementById("new-neighborhood-association-form");
+        var vm = new NeighborhoodAssociation(@Html.Raw(renter));
+        ko.applyBindings(vm, container);
+    </script>
+}
+
+@Html.ActionLink("Back to Index", "Index")
+
+<h1>New Neighborhood Association</h1>
+
+<div id="new-neighborhood-association-form">
+    @Html.Partial("_Form", Model)
+</div>

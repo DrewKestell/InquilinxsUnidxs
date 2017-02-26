@@ -13,7 +13,9 @@ namespace DataAccess.Context
         public virtual DbSet<FileType> FileTypes { get; set; }
         public virtual DbSet<File> Files { get; set; }
         public virtual DbSet<Landlord> Landlords { get; set; }
+        public virtual DbSet<NeighborhoodAssociation> NeighborhoodAssociations { get; set; }
         public virtual DbSet<Neighborhood> Neighborhoods { get; set; }
+        public virtual DbSet<PropertyManagementCompany> PropertyManagementCompanies { get; set; }
         public virtual DbSet<Renter> Renters { get; set; }
         public virtual DbSet<ResidenceComment> ResidenceComments { get; set; }
         public virtual DbSet<Residence> Residences { get; set; }
@@ -23,6 +25,9 @@ namespace DataAccess.Context
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Add<CascadeDeleteAttributeConvention>();
         }
     }
 }

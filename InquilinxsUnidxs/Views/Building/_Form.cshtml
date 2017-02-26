@@ -1,4 +1,4 @@
-﻿@using InquilinxsUnidxs.Presenters
+﻿@using UseCases.Presenters
 
 @model BuildingPresenter
 
@@ -9,7 +9,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="landlord">Landlord<abbr class="required" title="This field is required"> *</abbr></label>
-                <select class="form-control" id="landlord" data-bind="options: allLandlords, optionsValue: 'Item1', optionsText: 'Item2', value: landlordId, optionsCaption: 'Choose a Landlord...'"></select>
+                <select class="form-control" id="landlord" data-bind="options: allLandlords, optionsValue: 'ID', optionsText: 'Name', value: landlordId, optionsCaption: 'Choose a Landlord...'"></select>
             </div>
         </div>
         <div class="col-md-6">
@@ -23,13 +23,13 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="landlord">Neighborhood<abbr class="required" title="This field is required"> *</abbr></label>
-                <select class="form-control" id="neighborhood" data-bind="options: allNeighborhoods, optionsValue: 'Item1', optionsText: 'Item2', value: neighborhoodId, optionsCaption: 'Choose a Neighborhood...'"></select>
+                <select class="form-control" id="neighborhood" data-bind="options: allNeighborhoods, optionsValue: 'ID', optionsText: 'Name', value: neighborhoodId, optionsCaption: 'Choose a Neighborhood...'"></select>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label for="state">State<abbr class="required" title="This field is required"> *</abbr></label>
-                <select class="form-control" id="state" data-bind="options: allStates, optionsValue: 'Item1', optionsText: 'Item2', value: stateId, optionsCaption: 'Choose a State...'"></select>
+                <select class="form-control" id="state" data-bind="options: allStates, optionsValue: 'ID', optionsText: 'Name', value: stateId, optionsCaption: 'Choose a State...'"></select>
             </div>
         </div>
     </div>
@@ -54,9 +54,10 @@
             <!-- ko foreach: buildingComments -->
             <div class="form-group">
                 <div class="input-group">
-                    <input type="text" class="form-control" data-bind="value: comment" />
-                    <div class="input-group-addon" data-bind="click: $parent.removeBuildingComment"><span class="glyphicon glyphicon-remove"></span></div>
+                    <input type="text" class="form-control" data-bind="textInput: value" />
+                    <div class="input-group-addon" data-bind="click: $parent.removeBuildingComment"><span class="glyphicon glyphicon-remove"></span></div>                    
                 </div>
+                <small><em data-bind="text: commentInfo"></em></small>
             </div>
             <!-- /ko -->
         </div>
