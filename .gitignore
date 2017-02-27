@@ -247,4 +247,4 @@ ModelManifest.xml
 InquilinxsUnidxs/Web.config
 InquilinxsUnidxs/Web.Debug.config
 InquilinxsUnidxs/Web.Release.config
-InquilinxsUnidxs/Properties/PublishProfiles
+InquilinxsUnidxs/Properties/PublishProfiles/**
