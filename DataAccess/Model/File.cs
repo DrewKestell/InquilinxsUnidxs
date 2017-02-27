@@ -1,7 +1,7 @@
 ﻿using DataAccess.CustomConventions;
 using DataAccess.Enum;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Blob;
+//using Microsoft.WindowsAzure.Storage;
+//using Microsoft.WindowsAzure.Storage.Blob;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -29,20 +29,20 @@ namespace DataAccess.Model
 
         public virtual Residence Residence { get; set; }
 
-        public string SASURL()
-        {
-            var connectionString = ConfigurationManager.AppSettings["StorageConnectionString"];
-            var storageAccount = CloudStorageAccount.Parse(connectionString);
-            var blobClient = storageAccount.CreateCloudBlobClient();
-            var container = blobClient.GetContainerReference("inquilinxsunidxs");
+        //public string SASURL()
+        //{
+        //    var connectionString = ConfigurationManager.AppSettings["StorageConnectionString"];
+        //    var storageAccount = CloudStorageAccount.Parse(connectionString);
+        //    var blobClient = storageAccount.CreateCloudBlobClient();
+        //    var container = blobClient.GetContainerReference("inquilinxsunidxs");
 
-            SharedAccessBlobPolicy policy = new SharedAccessBlobPolicy()
-            {
-                Permissions = SharedAccessBlobPermissions.Read | SharedAccessBlobPermissions.Write | SharedAccessBlobPermissions.List,
-                SharedAccessExpiryTime = DateTime.UtcNow.AddHours(24)
-            };
+        //    SharedAccessBlobPolicy policy = new SharedAccessBlobPolicy()
+        //    {
+        //        Permissions = SharedAccessBlobPermissions.Read | SharedAccessBlobPermissions.Write | SharedAccessBlobPermissions.List,
+        //        SharedAccessExpiryTime = DateTime.UtcNow.AddHours(24)
+        //    };
 
-            return URL + container.GetSharedAccessSignature(policy);
-        }
+        //    return URL + container.GetSharedAccessSignature(policy);
+        //}
     }
 }

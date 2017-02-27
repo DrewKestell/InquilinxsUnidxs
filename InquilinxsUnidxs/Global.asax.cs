@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
+using System.Data.Entity.Migrations;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
@@ -18,6 +19,10 @@ namespace InquilinxsUnidxs
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            var configuration = new DataAccess.Migrations.Configuration();
+            var migrator = new DbMigrator(configuration);
+            migrator.Update();
         }
 
         static IContainer BuildContainer()

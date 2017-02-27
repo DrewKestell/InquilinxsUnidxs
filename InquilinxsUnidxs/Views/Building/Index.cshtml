@@ -58,7 +58,7 @@
 
     if (Model.PaginationInfo.TotalPages > 1)
     {
-        @Html.Partial("_Pagination", Model)
+        @Html.Partial("_Pagination", Model.PaginationInfo)
     }
 }
 else

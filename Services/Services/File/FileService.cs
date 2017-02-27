@@ -17,7 +17,7 @@ namespace Services
             this.unitOfWork = unitOfWork;
         }
 
-        public string GetFileUrl(int fileID) => fileRepository.Single(i => i.ID == fileID).SASURL();
+        public string GetFileUrl(int fileID) => ""; //fileRepository.Single(i => i.ID == fileID).SASURL();
 
         public void UploadFile(HttpPostedFileBase file)
         {
